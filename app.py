@@ -12,8 +12,39 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello():
-    return render_template("base.html")
+@app.route("/index")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/bookings", methods=["GET", "POST"])
+def get_bookings():
+    return render_template("bookings.html")
+
+
+@app.route("/clients", methods=["GET", "POST"])
+def get_clients():
+    return render_template("clients.html")
+
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    return render_template("contact.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    return render_template("login.html")
+
+
+@app.route("/profile", methods=["GET", "POST"])
+def get_profile():
+    return render_template("profile.html")
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    return render_template("signup.html")
 
 
 if __name__ == "__main__":

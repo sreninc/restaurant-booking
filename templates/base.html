@@ -19,32 +19,31 @@
             <a href="#!" class="brand-logo">Logo</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Signup</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Bookings</a></li>
-                <li><a href="#">Clients</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('signup') }}">Signup</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('get_bookings') }}">Bookings</a></li>
+                <li><a href="{{ url_for('get_clients') }}">Clients</a></li>
+                <li><a href="{{ url_for('get_profile') }}">Profile</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
             </div>
         </nav>
 
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Signup</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Bookings</a></li>
-            <li><a href="#">Clients</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('signup') }}">Signup</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('get_bookings') }}">Bookings</a></li>
+            <li><a href="{{ url_for('get_clients') }}">Clients</a></li>
+            <li><a href="{{ url_for('get_profile') }}">Profile</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
     </header>
 
-    <section>
-        Notifications
+    <section id="notifications">
     </section>
 
     <main class="container">
