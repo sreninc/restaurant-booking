@@ -3,4 +3,46 @@
 
 <h1>Contact</h1>
 
+    <div class="row">
+        <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="fas fa-user prefix"></i>
+                <input id="firstName" name="firstName" type="text" class="validate" minlength="2" required>
+                <label for="firstName">
+                    First Name
+                </label>
+                <span class="helper-text" data-error="Please enter at least 2 characters"></span>
+            </div>
+            <div class="input-field col s6">
+                <i class="fas fa-user-friends prefix"></i>
+                <input id="lastName" name="lastName" type="text" class="validate" minlength="2" required>
+                <label for="lastName">
+                    Last Name
+                </label>
+                <span class="helper-text" data-error="Please enter at least 2 characters"></span>
+            </div>
+            <div class="input-field col s12">
+                <i class="fas fa-envelope prefix"></i>
+                <input id="email" name="email" type="email" class="validate" required>
+                <label for="email">
+                    Email
+                </label>
+                <span class="helper-text" data-error="Please enter a valid email address"></span>
+            </div>
+            <div class="input-field col s12">
+            <i class="fas fa-comment-dots prefix"></i>
+                <textarea id="message" name="message" class="materialize-textarea" data-length="500" minlength="20" required></textarea>
+                <label for="message">
+                    Message
+                </label>
+                <span class="helper-text" data-error="Please provide more detail in your message to us"></span>
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+            Submit
+            <i class="fas fa-arrow-right right"></i>
+        </button>
+        </form>
+    </div>
 {% endblock %}

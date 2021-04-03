@@ -3,5 +3,7 @@ document.addEventListener(
     function() {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems, {accordion: true, edge: 'right'});
+        var textCounter = document.querySelectorAll('#message');
+        M.CharacterCounter.init(textCounter);
     }
 );
