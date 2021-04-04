@@ -31,7 +31,8 @@ def get_bookings():
 
 @app.route("/clients", methods=["GET", "POST"])
 def get_clients():
-    return render_template("clients.html")
+    clients = list(mongo.db.clients.find())
+    return render_template("clients.html", clients=clients)
 
 
 @app.route("/contact", methods=["GET", "POST"])
