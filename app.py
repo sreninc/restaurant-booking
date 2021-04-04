@@ -42,6 +42,13 @@ def get_clients():
     return render_template("clients.html", clients=clients)
 
 
+@app.route("/search_clients", methods=["GET", "POST"])
+def search_clients():
+    query = request.form.get("query")
+    clients = list(mongo.db.clients.find({"$text": {"$search": query}}))
+    return render_template("clients.html", clients=clients)
+
+
 @app.route("/add_client", methods=["GET", "POST"])
 def add_client():
     if request.method == "POST":
