@@ -29,6 +29,13 @@ def get_bookings():
     return render_template("bookings.html", bookings=bookings)
 
 
+@app.route("/delete_booking/<booking_id>")
+def delete_booking(booking_id):
+    mongo.db.bookings.remove({"_id": ObjectId(booking_id)})
+    flash("Booking Successfully Deleted")
+    return redirect(url_for("get_bookings"))
+
+
 @app.route("/clients", methods=["GET", "POST"])
 def get_clients():
     clients = list(mongo.db.clients.find())
