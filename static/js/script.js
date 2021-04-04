@@ -7,3 +7,9 @@ document.addEventListener(
         M.CharacterCounter.init(textCounter);
     }
 );
+
+// Initiate modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+});
