@@ -35,6 +35,25 @@ def get_clients():
     return render_template("clients.html", clients=clients)
 
 
+@app.route("/add_client", methods=["GET", "POST"])
+def add_client():
+    if request.method == "POST":
+        marketing_consent = "on" if request.form.get("marketingConsent") else "off"
+        client = {
+            "first_name": request.form.get("firstName"),
+            "last_name": request.form.get("lastName"),
+            "email": request.form.get("email"),
+            "mobile": request.form.get("mobile"),
+            "marketing_consent": marketing_consent,
+            "created_by": session["user"]
+        }
+        mongo.db.clients.insert_one(client)
+        flash("Client Successfully Added")
+        return redirect(url_for("get_clients"))
+
+    return render_template("clients.html")
+
+
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     return render_template("contact.html")

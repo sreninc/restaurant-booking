@@ -4,7 +4,7 @@
 <h1>Clients</h1>
 
     <div class="row card-panel grey lighten-5">
-        <form action="" method="post" class="col s12">
+        <form class="col s12">
             <div class="row valign-wrapper center-align">
                 <div class="input-field col s12 m8">
                     <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
@@ -28,18 +28,18 @@
     <div id="addClient" class="modal">
         <div class="modal-content">
             <div class="row">
-                <form class="col s12">
+                <form class="col s12" id="addClientForm" method="POST" action="{{ url_for('add_client') }}">
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="fas fa-user prefix"></i>
-                        <input id="firstName" type="text" class="validate">
+                        <input id="firstName" name="firstName" type="text" class="validate">
                         <label for="firstName">
                             First Name
                         </label>
                     </div>
                     <div class="input-field col s6">
                         <i class="fas fa-user-friends prefix"></i>
-                        <input id="lastName" type="text" class="validate">
+                        <input id="lastName" name="lastName" type="text" class="validate">
                         <label for="lastName">
                             Last Name
                         </label>
@@ -47,7 +47,7 @@
 
                     <div class="input-field col s6">
                         <i class="fas fa-envelope prefix"></i>
-                        <input id="email" type="text" class="validate">
+                        <input id="email" name="email" type="text" class="validate">
                         <label for="email">
                             Email
                         </label>
@@ -55,18 +55,19 @@
 
                     <div class="input-field col s6">
                         <i class="fas fa-phone prefix"></i>
-                        <input id="mobile" type="text" class="validate">
+                        <input id="mobile" name="mobile" type="text" class="validate">
                         <label for="mobile">
                             Mobile
                         </label>
                     </div>
 
                     <div class="input-field col s6">
-                        <i class="fas fa-check-circle prefix"></i>
-                        <input id="marketingConsent" type="text" class="validate">
-                        <label for="marketingConsent">
-                            Marketing Consent
+                        <p>
+                        <label>
+                            <input id="marketingConsent" name="marketingConsent" type="checkbox" />
+                            <span>Marketing Consent</span>
                         </label>
+                        </p>
                     </div>
 
                 </div>
@@ -74,8 +75,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button data-target="addBooking" class="btn modal-close">Save</button>
-            <button data-target="addBooking" class="btn modal-close">Cancel</button>
+            <button data-target="addBooking" class="btn modal-close" type="submit" form="addClientForm">Save</button>
+            <button data-target="addBooking" class="btn modal-close" type="reset" form="addClientForm">Cancel</button>
         </div>
     </div>
 
