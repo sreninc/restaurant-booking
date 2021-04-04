@@ -23,9 +23,10 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/bookings", methods=["GET", "POST"])
+@app.route("/get_bookings", methods=["GET", "POST"])
 def get_bookings():
-    return render_template("bookings.html")
+    bookings = list(mongo.db.bookings.find())
+    return render_template("bookings.html", bookings=bookings)
 
 
 @app.route("/clients", methods=["GET", "POST"])
