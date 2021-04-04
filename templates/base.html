@@ -25,8 +25,8 @@
                 <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('get_bookings') }}">Bookings</a></li>
                 <li><a href="{{ url_for('get_clients') }}">Clients</a></li>
-                <li><a href="{{ url_for('get_profile') }}">Profile</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
             </ul>
             </div>
         </nav>
@@ -38,12 +38,22 @@
             <li><a href="{{ url_for('login') }}">Login</a></li>
             <li><a href="{{ url_for('get_bookings') }}">Bookings</a></li>
             <li><a href="{{ url_for('get_clients') }}">Clients</a></li>
-            <li><a href="{{ url_for('get_profile') }}">Profile</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
     </header>
 
-    <section id="notifications">
+    <section>
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes">
+                        <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </section>
 
     <main class="container">
