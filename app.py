@@ -54,9 +54,9 @@ def add_client():
     if request.method == "POST":
         marketing_consent = "on" if request.form.get("marketingConsent") else "off"
         client = {
-            "first_name": request.form.get("firstName"),
-            "last_name": request.form.get("lastName"),
-            "email": request.form.get("email"),
+            "first_name": request.form.get("firstName").capitalize(),
+            "last_name": request.form.get("lastName").capitalize(),
+            "email": request.form.get("email").lower(),
             "mobile": request.form.get("mobile"),
             "marketing_consent": marketing_consent,
             "created_by": session["user"]
