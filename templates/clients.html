@@ -21,6 +21,64 @@
         </form>
     </div>
 
+
+    <!-- Modal Trigger -->
+    <button data-target="addClient" class="btn modal-trigger">Add Client</button>
+        <!-- Modal Structure -->
+    <div id="addClient" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="fas fa-user prefix"></i>
+                        <input id="firstName" type="text" class="validate">
+                        <label for="firstName">
+                            First Name
+                        </label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="fas fa-user-friends prefix"></i>
+                        <input id="lastName" type="text" class="validate">
+                        <label for="lastName">
+                            Last Name
+                        </label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="fas fa-envelope prefix"></i>
+                        <input id="email" type="text" class="validate">
+                        <label for="email">
+                            Email
+                        </label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="fas fa-phone prefix"></i>
+                        <input id="mobile" type="text" class="validate">
+                        <label for="mobile">
+                            Mobile
+                        </label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="fas fa-check-circle prefix"></i>
+                        <input id="marketingConsent" type="text" class="validate">
+                        <label for="marketingConsent">
+                            Marketing Consent
+                        </label>
+                    </div>
+
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button data-target="addBooking" class="btn modal-close">Save</button>
+            <button data-target="addBooking" class="btn modal-close">Cancel</button>
+        </div>
+    </div>
+
     {% if clients|length > 0 %}
     <ul class="collapsible">
         {% for client in clients %}
