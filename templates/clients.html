@@ -88,6 +88,7 @@
             <li>{{ client.email }}</li>
             <li>{{ client.mobile }}</li>
             <li>{{ client.marketing_consent }}</li>
+            <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4">Delete</a>
             <hr>
         {% endfor %}
     </ul>

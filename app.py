@@ -54,6 +54,13 @@ def add_client():
     return render_template("clients.html")
 
 
+@app.route("/delete_client/<client_id>")
+def delete_client(client_id):
+    mongo.db.clients.remove({"_id": ObjectId(client_id)})
+    flash("Client Successfully Deleted")
+    return redirect(url_for("get_clients"))
+
+
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     return render_template("contact.html")
