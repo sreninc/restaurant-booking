@@ -17,4 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
-  });
+});
+
+function addBooking(clientId) {
+    document.getElementById("clientId").value = clientId;
+    var elem = document.querySelectorAll('.modal')[1];
+    var instance = M.Modal.getInstance(elem);
+    instance.open();
+}

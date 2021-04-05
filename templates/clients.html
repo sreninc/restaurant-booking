@@ -80,6 +80,62 @@
         </div>
     </div>
 
+    <!-- Modal Structure -->
+    <div id="addBooking" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12" id="addBookingForm" method="POST" action="{{ url_for('add_booking') }}">
+                <div class="row">
+                    <input id="clientId" name="clientId" type="hidden" />
+                    <div class="input-field col s6">
+                        <i class="fas fa-calendar-day prefix"></i>
+                        <input id="date" name="date" type="date" class="validate">
+                        <label for="date">
+                            Date
+                        </label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="fas fa-clock prefix"></i>
+                        <input id="time" name="time" type="time" class="validate">
+                        <label for="time">
+                            Time
+                        </label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="fas fa-users prefix"></i>
+                        <input id="people" name="people" type="number" class="validate">
+                        <label for="people">
+                            People
+                        </label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="fas fa-clipboard prefix"></i>
+                        <input id="status" name="status" type="text" class="validate">
+                        <label for="status">
+                            Status
+                        </label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="fas fa-dollar-sign prefix"></i>
+                        <input id="value" name="value" type="number" class="validate">
+                        <label for="value">
+                            Value
+                        </label>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button data-target="addBooking" class="btn modal-close" type="submit" form="addBookingForm">Save</button>
+            <button data-target="addBooking" class="btn modal-close" type="reset" form="addBookingForm">Cancel</button>
+        </div>
+    </div>
+
     {% if clients|length > 0 %}
     <ul class="collapsible">
         {% for client in clients %}
@@ -103,10 +159,7 @@
                                 {{ client.email }}
                             </td>
                             <td>
-                                <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small green accent-4">Edit</a>
-                            </td>
-                            <td>
-                                <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4">Delete</a>
+                                <button onclick="addBooking('{{ client._id }}')" class="btn-small blue accent-4">+ Booking</button>
                             </td>
                         </tr>
                     </table>
@@ -117,6 +170,8 @@
                     <ul class="li">Bookings Made: 12</ul>
                     <ul class="li">Bookings Completed: 8</ul>
                     <ul class="li">Client Value: €600</ul>
+                    <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small green accent-4">Edit</a>
+                    <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4">Delete</a>
                 </div>
             </li>
         {% endfor %}

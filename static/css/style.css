@@ -17,9 +17,8 @@ main {
 }
 
 .clients-table:first-child tr:first-child td:first-child,
-.clients-table:first-child tr:first-child td:nth-child(6),
-.clients-table:first-child tr:first-child td:nth-child(7) {
-    width: 5%;
+.clients-table:first-child tr:first-child td:nth-child(6) {
+    width: 10%;
 }
 
 .clients-table:first-child tr:first-child td:nth-child(2),
