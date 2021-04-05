@@ -11,3 +11,19 @@ main {
 .footer-icons {
     margin-right: 1rem;
 }
+
+.clients-table {
+    border-collapse: initial;
+}
+
+.clients-table:first-child tr:first-child td:first-child,
+.clients-table:first-child tr:first-child td:nth-child(6),
+.clients-table:first-child tr:first-child td:nth-child(7) {
+    width: 5%;
+}
+
+.clients-table:first-child tr:first-child td:nth-child(2),
+.clients-table:first-child tr:first-child td:nth-child(3),
+.clients-table:first-child tr:first-child td:nth-child(4) {
+    width: 15%;
+}

@@ -83,13 +83,42 @@
     {% if clients|length > 0 %}
     <ul class="collapsible">
         {% for client in clients %}
-            <li>{{ client.first_name }}</li>
-            <li>{{ client.last_name }}</li>
-            <li>{{ client.email }}</li>
-            <li>{{ client.mobile }}</li>
-            <li>{{ client.marketing_consent }}</li>
-            <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4">Delete</a>
-            <hr>
+            <li>
+                <div class="collapsible-header">
+                    <table class="clients-table">
+                        <tr>
+                            <td>
+                                <i class="fas fa-plus"></i>
+                            </td>
+                            <td>
+                                {{ client.first_name }}
+                            </td>
+                            <td>
+                                {{ client.last_name }}
+                            </td>
+                            <td>
+                                {{ client.mobile }}
+                            </td>
+                            <td>
+                                {{ client.email }}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small green accent-4">Edit</a>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4">Delete</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="collapsible-body">
+                    <ul class="li">Marketing Consent: {{ client.marketing_consent }}</ul>
+                    <ul class="li">Client Since: 20/01/2021</ul>
+                    <ul class="li">Bookings Made: 12</ul>
+                    <ul class="li">Bookings Completed: 8</ul>
+                    <ul class="li">Client Value: €600</ul>
+                </div>
+            </li>
         {% endfor %}
     </ul>
     {% else %}
