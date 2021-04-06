@@ -25,3 +25,10 @@ function addBooking(clientId) {
     var instance = M.Modal.getInstance(elem);
     instance.open();
 }
+
+function editClient(clientId) {
+    document.getElementById("editClient").value = clientId;
+    var elem = document.querySelectorAll('.modal')[0];
+    var instance = M.Modal.getInstance(elem);
+    instance.open();
+}

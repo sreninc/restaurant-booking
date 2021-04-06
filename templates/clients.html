@@ -29,6 +29,7 @@
         <div class="modal-content">
             <div class="row">
                 <form class="col s12" id="addClientForm" method="POST" action="{{ url_for('add_client') }}">
+                    <input type="hidden" id="editClient" name="editClient">
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="fas fa-user prefix"></i>
@@ -170,7 +171,7 @@
                     <ul class="li">Bookings Made: 12</ul>
                     <ul class="li">Bookings Completed: 8</ul>
                     <ul class="li">Client Value: €600</ul>
-                    <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small green accent-4">Edit</a>
+                    <button onclick="editClient('{{ client._id }}')" class="btn-small green accent-4">Edit</button>
                     <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4">Delete</a>
                 </div>
             </li>

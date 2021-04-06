@@ -31,13 +31,9 @@ def get_bookings():
         {"first_name": 1, "last_name": 1}))
 
     for x in range(len(bookings)):
-        print("-----")
-        print(bookings[x]["client_id"])
-        print("start client")
-        for y in range(len(clients)):
-            print(clients[y]["_id"])
-            if clients[y]["_id"] == bookings[x]["client_id"]:
-                print("true")
+        for y in range(len(clients)): 
+            if str(clients[y]["_id"]) == str(bookings[x]["client_id"]):
+                bookings[x]["client_id"] = clients[y]["first_name"] + " " + clients[y]["last_name"]
     return render_template("bookings.html", bookings=bookings, clients=clients)
 
 
