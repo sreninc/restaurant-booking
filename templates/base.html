@@ -19,10 +19,10 @@
             <a href="#!" class="brand-logo">Restaurant Bookings</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                {% if session.user %}
+                {% if session.email %}
                     <li><a href="{{ url_for('get_bookings') }}">Bookings</a></li>
                     <li><a href="{{ url_for('get_clients') }}">Clients</a></li>
-                    <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                    <li><a href="{{ url_for('profile', email=session['email']) }}">Profile</a></li>
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 {% else %}
                     <li><a href="{{ url_for('index') }}">Home</a></li>
@@ -35,10 +35,10 @@
         </nav>
 
         <ul class="sidenav" id="mobile-demo">
-            {% if session.user %}
+            {% if session.email %}
                 <li><a href="{{ url_for('get_bookings') }}">Bookings</a></li>
                 <li><a href="{{ url_for('get_clients') }}">Clients</a></li>
-                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                <li><a href="{{ url_for('profile', email=session['email']) }}">Profile</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}
                 <li><a href="{{ url_for('index') }}">Home</a></li>

@@ -10,9 +10,8 @@
                 <div class="row">
 					<div class="input-field col s12">
 						<i class="fas fa-user-plus prefix light-blue-text text-darken-4"></i>
-						<input id="username" name="username" type="text" minlength="5"
-                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
-						<label for="username">Username</label>
+						<input id="email" name="email" type="email" class="validate" required>
+						<label for="email">email</label>
 					</div>
                 </div>
                 <!-- password -->
@@ -24,10 +23,28 @@
                         <label for="password">Password</label>
                     </div>
                 </div>
-                <!-- register -->
+                <!-- name -->
+                <div class="row">
+                    <div class="input-field col s12">
+						<i class="fas fa-user-tag prefix light-blue-text text-darken-4"></i>
+                        <input id="name" name="name" type="text" minlength="2"
+                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                        <label for="name">Name</label>
+                    </div>
+                </div>
+                <!-- restaurant name -->
+                <div class="row">
+                    <div class="input-field col s12">
+						<i class="fas fa-home prefix light-blue-text text-darken-4"></i>
+                        <input id="restaurant-name" name="restaurant-name" type="text" minlength="2"
+                            maxlength="25" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                        <label for="restaurant-name">Restaurant Name</label>
+                    </div>
+                </div>
+                <!-- signup -->
                 <div class="row">
                     <button type="submit" class="col s12 btn-large light-blue darken-4 text-shadow">
-                        Register <i class="fas fa-sign-in-alt"></i>
+                        Signup <i class="fas fa-sign-in-alt"></i>
                     </button>
                 </div>
             </div>
