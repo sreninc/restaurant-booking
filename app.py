@@ -40,6 +40,21 @@ def get_bookings():
 @app.route("/add_booking", methods=["GET", "POST"])
 def add_booking():
     if request.method == "POST":
+        # find the client
+        client = mongo.db.clients.find_one({"_id": ObjectId(request.form.get("clientId"))})
+        print(client)
+        # create the client array to update with the new booking number
+        client_array = {
+            "first_name": client["first_name"],
+            "last_name": client["last_name"],
+            "email": client["email"],
+            "mobile": client["mobile"],
+            "marketing_consent": client["marketing_consent"],
+            "bookings": client["bookings"] + 1,
+            "created_by": client["created_by"]
+        }
+        # update the client
+        mongo.db.clients.update({"_id": ObjectId(request.form.get("clientId"))}, client_array)
         booking = {
             "client_id": request.form.get("clientId"),
             "date": request.form.get("date"),
@@ -86,6 +101,7 @@ def add_client():
             "email": request.form.get("email").lower(),
             "mobile": request.form.get("mobile"),
             "marketing_consent": marketing_consent,
+            "bookings": 0,
             "created_by": session["email"]
         }
         mongo.db.clients.insert_one(client)
