@@ -33,7 +33,7 @@ def get_bookings():
     for x in range(len(bookings)):
         for y in range(len(clients)): 
             if str(clients[y]["_id"]) == str(bookings[x]["client_id"]):
-                bookings[x]["client_id"] = clients[y]["first_name"] + " " + clients[y]["last_name"]
+                bookings[x]["new_client_id"] = clients[y]["first_name"] + " " + clients[y]["last_name"]
     return render_template("bookings.html", bookings=bookings, clients=clients)
 
 
@@ -71,8 +71,23 @@ def add_booking():
     return render_template("bookings.html")
 
 
-@app.route("/delete_booking/<booking_id>")
-def delete_booking(booking_id):
+@app.route("/delete_booking/<booking_id>/<client_id>")
+def delete_booking(booking_id, client_id):
+    # find the client
+    client = mongo.db.clients.find_one({"_id": ObjectId(client_id)})
+    print(client)
+    # create the client array to update with the new booking number
+    client_array = {
+        "first_name": client["first_name"],
+        "last_name": client["last_name"],
+        "email": client["email"],
+        "mobile": client["mobile"],
+        "marketing_consent": client["marketing_consent"],
+        "bookings": client["bookings"] - 1,
+        "created_by": client["created_by"]
+    }
+    # update the client
+    mongo.db.clients.update({"_id": ObjectId(client_id)}, client_array)
     mongo.db.bookings.remove({"_id": ObjectId(booking_id)})
     flash("Booking Successfully Deleted")
     return redirect(url_for("get_bookings"))
