@@ -117,13 +117,13 @@ def login():
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
-                        session["email"] = request.form.get("email").lower()
-                        user = list(mongo.db.users.find({"email": session["email"]}))
-                        flash("Welcome, {}".format(
-                            request.form.get("email")))
-                        return redirect(url_for(
-                            "profile", user=user))
+                existing_user["password"], request.form.get("password")):
+                    session["email"] = request.form.get("email").lower()
+                    email = list(mongo.db.users.find({"email": session["email"]}))
+                    flash("Welcome, {}".format(
+                        request.form.get("email")))
+                    return redirect(url_for(
+                        "profile", email=email))
             else:
                 # invalid password match
                 flash("Incorrect Email and/or Password")
