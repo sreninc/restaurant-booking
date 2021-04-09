@@ -171,7 +171,7 @@
                     </table>
                 </div>
                 <div class="collapsible-body">
-                    <ul class="li">Marketing Consent: {{ client.marketing_consent }}</ul>
+                    <ul class="li">Marketing Consent: {% if client.marketing_consent == "on" %}Yes {% else %} No {% endif %}</ul>
                     <ul class="li">Client Since: {{ client.created_date.strftime('%d-%m-%Y') }}</ul>
                     <ul class="li">Bookings Made: {{ client.bookings }}</ul>
                     <ul class="li">Bookings Completed: 8</ul>
