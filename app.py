@@ -1,4 +1,5 @@
 import os
+import datetime
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -50,6 +51,7 @@ def add_booking():
             "mobile": client["mobile"],
             "marketing_consent": client["marketing_consent"],
             "bookings": client["bookings"] + 1,
+            "value": client["value"] + int(request.form.get("value")),
             "created_by": client["created_by"]
         }
         # update the client
@@ -115,7 +117,9 @@ def add_client():
             "mobile": request.form.get("mobile"),
             "marketing_consent": marketing_consent,
             "bookings": 0,
-            "created_by": session["email"]
+            "value": 0,
+            "created_by": session["email"],
+            "created_date": datetime.datetime.now()
         }
         mongo.db.clients.insert_one(client)
         flash("Client Successfully Added")
