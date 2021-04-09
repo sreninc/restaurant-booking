@@ -174,7 +174,7 @@
                     <ul class="li">Marketing Consent: {% if client.marketing_consent == "on" %}Yes {% else %} No {% endif %}</ul>
                     <ul class="li">Client Since: {{ client.created_date.strftime('%d-%m-%Y') }}</ul>
                     <ul class="li">Bookings Made: {{ client.bookings }}</ul>
-                    <ul class="li">Bookings Completed: 8</ul>
+                    <ul class="li">Bookings Completed: {{ client.bookings_completed }}</ul>
                     <ul class="li">Client Value: €{{ client.value }}</ul>
                     <button onclick="editClient('{{ client._id }}')" class="btn-small green accent-4">Edit</button>
                     <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4">Delete</a>

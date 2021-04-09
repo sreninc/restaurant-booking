@@ -41,6 +41,12 @@ def get_bookings():
 @app.route("/add_booking", methods=["GET", "POST"])
 def add_booking():
     if request.method == "POST":
+        if request.form.get("status") == "completed":
+            bookings_completed = 1
+            print("yes")
+        else:
+            bookings_completed = 0
+            print("no")
         # find the client
         client = mongo.db.clients.find_one({"_id": ObjectId(request.form.get("clientId"))})
         # create the client array to update with the new booking number
@@ -51,8 +57,10 @@ def add_booking():
             "mobile": client["mobile"],
             "marketing_consent": client["marketing_consent"],
             "bookings": client["bookings"] + 1,
+            "bookings_completed": client["bookings_completed"] + int(bookings_completed),
             "value": client["value"] + int(request.form.get("value")),
-            "created_by": client["created_by"]
+            "created_by": client["created_by"],
+            "created_date": client["created_date"]
         }
         # update the client
         mongo.db.clients.update({"_id": ObjectId(request.form.get("clientId"))}, client_array)
@@ -117,6 +125,7 @@ def add_client():
             "mobile": request.form.get("mobile"),
             "marketing_consent": marketing_consent,
             "bookings": 0,
+            "bookings_completed": 0,
             "value": 0,
             "created_by": session["email"],
             "created_date": datetime.datetime.now()
