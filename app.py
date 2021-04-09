@@ -42,7 +42,6 @@ def add_booking():
     if request.method == "POST":
         # find the client
         client = mongo.db.clients.find_one({"_id": ObjectId(request.form.get("clientId"))})
-        print(client)
         # create the client array to update with the new booking number
         client_array = {
             "first_name": client["first_name"],
@@ -75,7 +74,6 @@ def add_booking():
 def delete_booking(booking_id, client_id):
     # find the client
     client = mongo.db.clients.find_one({"_id": ObjectId(client_id)})
-    print(client)
     # create the client array to update with the new booking number
     client_array = {
         "first_name": client["first_name"],

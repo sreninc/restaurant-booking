@@ -19,6 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Collapsible.init(elems);
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+var elems = document.querySelectorAll('select');
+var instances = M.FormSelect.init(elems, { dropdownOptions: {container: document.body, constrainWidth: true }} );
+});
+
 function addBooking(clientId) {
     document.getElementById("clientId").value = clientId;
     var elem = document.querySelectorAll('.modal')[1];
