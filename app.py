@@ -30,7 +30,7 @@ def get_bookings():
     clients = list(mongo.db.clients.find(
         {},
         {"first_name": 1, "last_name": 1}))
-
+    print(clients)
     for x in range(len(bookings)):
         for y in range(len(clients)): 
             if str(clients[y]["_id"]) == str(bookings[x]["client_id"]):
