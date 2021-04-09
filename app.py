@@ -116,6 +116,7 @@ def search_clients():
 
 @app.route("/add_client", methods=["GET", "POST"])
 def add_client():
+    print(request.form.get("editClient"))
     if request.method == "POST":
         marketing_consent = "on" if request.form.get("marketingConsent") else "off"
         client = {
@@ -130,7 +131,10 @@ def add_client():
             "created_by": session["email"],
             "created_date": datetime.datetime.now()
         }
-        mongo.db.clients.insert_one(client)
+        if request.form.get("editClient"):
+            mongo.db.clients.update({"_id": ObjectId(request.form.get("editClient"))}, client)
+        else:
+            mongo.db.clients.insert_one(client)
         flash("Client Successfully Added")
         return redirect(url_for("get_clients"))
 
