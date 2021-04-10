@@ -26,7 +26,22 @@ var instances = M.FormSelect.init(elems, { dropdownOptions: {container: document
 
 function addBooking(clientId) {
     document.getElementById("clientId").value = clientId;
+    document.getElementById("clientSelect").style.display = "block";
     var elem = document.querySelectorAll('.modal')[1];
+    var instance = M.Modal.getInstance(elem);
+    instance.open();
+}
+
+function editBooking(client_id, booking_id) {
+    document.getElementById("booking_id").value = booking_id;
+    var select = document.getElementById("clientId").options;
+    console.log(select);
+    for (i = 0; i < select.length; i++) {
+        if (select[i].value == client_id) {
+            select[i].selected = true;
+        }
+    }
+    var elem = document.querySelectorAll('.modal')[0];
     var instance = M.Modal.getInstance(elem);
     instance.open();
 }
