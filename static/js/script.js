@@ -35,7 +35,6 @@ function addBooking(clientId) {
 function editBooking(client_id, booking_id) {
     document.getElementById("booking_id").value = booking_id;
     var select = document.getElementById("clientId").options;
-    console.log(select);
     for (i = 0; i < select.length; i++) {
         if (select[i].value == client_id) {
             select[i].selected = true;
@@ -44,6 +43,10 @@ function editBooking(client_id, booking_id) {
     var elem = document.querySelectorAll('.modal')[0];
     var instance = M.Modal.getInstance(elem);
     instance.open();
+
+    var selectElems = document.querySelectorAll('select');
+    selectElems[0].setAttribute("disabled", true);
+    var selectInstances = M.FormSelect.init(selectElems, { dropdownOptions: {container: document.body, constrainWidth: true }} );
 }
 
 function editClient(clientId) {
