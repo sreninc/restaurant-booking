@@ -177,7 +177,7 @@
                     <ul class="li">Bookings Completed: {{ client.bookings_completed }}</ul>
                     <ul class="li">Client Value: €{{ client.value }}</ul>
                     <button onclick="editClient('{{ client._id }}')" class="btn-small green accent-4">Edit</button>
-                    <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4">Delete</a>
+                    <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4" {% if client.bookings > 0 %}disabled{% endif %}>Delete</a>
                 </div>
             </li>
         {% endfor %}
