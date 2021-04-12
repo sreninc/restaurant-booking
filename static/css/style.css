@@ -17,13 +17,12 @@ main {
 }
 
 .clients-table:first-child tr:first-child td:first-child,
-.clients-table:first-child tr:first-child td:nth-child(6) {
+.clients-table:first-child tr:first-child td:nth-child(5) {
     width: 10%;
 }
 
 .clients-table:first-child tr:first-child td:nth-child(2),
-.clients-table:first-child tr:first-child td:nth-child(3),
-.clients-table:first-child tr:first-child td:nth-child(4) {
+.clients-table:first-child tr:first-child td:nth-child(3) {
     width: 15%;
 }
 
@@ -52,4 +51,8 @@ main {
 
 .card-image {
     margin-top: 10px;
+}
+
+.client-collapsible {
+    padding: 15px!important;
 }

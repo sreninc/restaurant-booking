@@ -153,10 +153,7 @@
                                 <i class="fas fa-plus"></i>
                             </td>
                             <td>
-                                {{ client.first_name }}
-                            </td>
-                            <td>
-                                {{ client.last_name }}
+                                {{ client.first_name }} {{ client.last_name }}
                             </td>
                             <td>
                                 {{ client.mobile }}
@@ -170,14 +167,26 @@
                         </tr>
                     </table>
                 </div>
-                <div class="collapsible-body">
-                    <ul class="li">Marketing Consent: {% if client.marketing_consent == "on" %}Yes {% else %} No {% endif %}</ul>
-                    <ul class="li">Client Since: {{ client.created_date.strftime('%d-%m-%Y') }}</ul>
-                    <ul class="li">Bookings Made: {{ client.bookings }}</ul>
-                    <ul class="li">Bookings Completed: {{ client.bookings_completed }}</ul>
-                    <ul class="li">Client Value: €{{ client.value }}</ul>
-                    <button onclick="editClient('{{ client._id }}')" class="btn-small green accent-4">Edit</button>
-                    <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4" {% if client.bookings > 0 %}disabled{% endif %}>Delete</a>
+                <div class="collapsible-body row">
+                    <div class="col s6 client-collapsible">
+                        Marketing Consent: {% if client.marketing_consent == "on" %}Yes {% else %} No {% endif %}
+                    </div>
+                    <div class="col s6 client-collapsible">
+                        Client Since: {{ client.created_date.strftime('%d-%m-%Y') }}
+                    </div>
+                    <div class="col s6 client-collapsible">
+                        Bookings Made: {{ client.bookings }}
+                    </div>
+                    <div class="col s6 client-collapsible">
+                        Bookings Completed: {{ client.bookings_completed }}
+                    </div>
+                    <div class="col s6 client-collapsible">
+                        Client Value: €{{ client.value }}
+                    </div>
+                    <div class="col s6 client-collapsible">
+                        <button onclick="editClient('{{ client._id }}')" class="btn-small green accent-4">Edit</button>
+                        <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4" {% if client.bookings > 0 %}disabled{% endif %}>Delete</a>
+                    </div>
                 </div>
             </li>
         {% endfor %}
