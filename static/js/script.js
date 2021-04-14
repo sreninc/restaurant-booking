@@ -76,8 +76,8 @@ function editClient(clientId) {
     const row = document.getElementById(clientId);
     var firstName = row.nextElementSibling;
     var lastName = firstName.nextElementSibling;
-    var email = lastName.nextElementSibling;
-    var mobile = email.nextElementSibling;
+    var mobile = lastName.nextElementSibling;
+    var email = mobile.nextElementSibling;
     
     firstName = firstName.innerHTML.trim();
     lastName = lastName.innerHTML.trim();
