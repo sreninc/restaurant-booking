@@ -1,5 +1,5 @@
 import os
-import datetime
+from datetime import datetime
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -32,7 +32,9 @@ def get_bookings():
         {"first_name": 1, "last_name": 1}))
     print(clients)
     for x in range(len(bookings)):
-        for y in range(len(clients)): 
+        new_date = datetime.strptime(bookings[x]["date"], '%Y-%m-%d')
+        bookings[x]["new_date"] = new_date.strftime("%a %d %b")
+        for y in range(len(clients)):
             if str(clients[y]["_id"]) == str(bookings[x]["client_id"]):
                 bookings[x]["new_client_id"] = clients[y]["first_name"] + " " + clients[y]["last_name"]
     return render_template("bookings.html", bookings=bookings, clients=clients)

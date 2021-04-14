@@ -34,10 +34,11 @@ function addBooking(clientId) {
     instance.open();
 }
 
-function editBooking(client_id, booking_id, parent) {
+function editBooking(client_id, booking_id, booking_date, parent) {
     const row = document.getElementById("bookings-table").rows[parent].cells;
 
-    document.getElementById("date").value = row[0].innerHTML;
+    document.getElementById("date").value = booking_date;
+    console.log(booking_date);
     document.getElementById("time").value = row[1].innerHTML;
     document.getElementById("people").value = row[3].innerHTML;
     document.getElementById("value").value = row[5].innerHTML.split("€")[1];
