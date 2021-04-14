@@ -121,21 +121,32 @@ def add_client():
     print(request.form.get("editClient"))
     if request.method == "POST":
         marketing_consent = "on" if request.form.get("marketingConsent") else "off"
-        client = {
-            "first_name": request.form.get("firstName").capitalize(),
-            "last_name": request.form.get("lastName").capitalize(),
-            "email": request.form.get("email").lower(),
-            "mobile": request.form.get("mobile"),
-            "marketing_consent": marketing_consent,
-            "bookings": 0,
-            "bookings_completed": 0,
-            "value": 0,
-            "created_by": session["email"],
-            "created_date": datetime.datetime.now()
-        }
+        print(request.form.get("clientId"))
         if request.form.get("editClient"):
-            mongo.db.clients.update({"_id": ObjectId(request.form.get("editClient"))}, client)
+            mongo.db.clients.update(
+                {"_id": ObjectId(request.form.get("editClient"))},
+                {"$set": {
+                    "first_name": request.form.get("firstName").capitalize(),
+                    "last_name": request.form.get("lastName").capitalize(),
+                    "email": request.form.get("email").lower(),
+                    "mobile": request.form.get("mobile"),
+                    "marketing_consent": marketing_consent
+                    }
+                }
+            )
         else:
+            client = {
+                "first_name": request.form.get("firstName").capitalize(),
+                "last_name": request.form.get("lastName").capitalize(),
+                "email": request.form.get("email").lower(),
+                "mobile": request.form.get("mobile"),
+                "marketing_consent": marketing_consent,
+                "bookings": 0,
+                "bookings_completed": 0,
+                "value": 0,
+                "created_by": session["email"],
+                "created_date": datetime.today()
+            }
             mongo.db.clients.insert_one(client)
         flash("Client Successfully Added")
         return redirect(url_for("get_clients"))
