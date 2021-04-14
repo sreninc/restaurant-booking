@@ -26,7 +26,9 @@ var instances = M.FormSelect.init(elems, { dropdownOptions: {container: document
 
 function addBooking(clientId) {
     document.getElementById("clientId").value = clientId;
-    document.getElementById("clientSelect").style.display = "block";
+    if (document.getElementById("clientSelect")) {
+        document.getElementById("clientSelect").style.display = "block";
+    }
     var elem = document.querySelectorAll('.modal')[1];
     var instance = M.Modal.getInstance(elem);
     instance.open();
