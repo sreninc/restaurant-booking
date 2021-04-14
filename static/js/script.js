@@ -34,7 +34,21 @@ function addBooking(clientId) {
     instance.open();
 }
 
-function editBooking(client_id, booking_id) {
+function editBooking(client_id, booking_id, parent) {
+    const row = document.getElementById("bookings-table").rows[parent].cells;
+
+    document.getElementById("date").value = row[0].innerHTML;
+    document.getElementById("time").value = row[1].innerHTML;
+    document.getElementById("people").value = row[3].innerHTML;
+    document.getElementById("value").value = row[5].innerHTML.split("€")[1];
+
+    var selectStatus = document.getElementById("status").options;
+    for (i = 0; i < selectStatus.length; i++) {
+        if (selectStatus[i].value == row[4].innerHTML.toLowerCase()) {
+            selectStatus[i].selected = true;
+        }
+    }
+
     document.getElementById("booking_id").value = booking_id;
     var select = document.getElementById("clientId").options;
     for (i = 0; i < select.length; i++) {
@@ -49,6 +63,8 @@ function editBooking(client_id, booking_id) {
     var selectElems = document.querySelectorAll('select');
     selectElems[0].setAttribute("disabled", true);
     var selectInstances = M.FormSelect.init(selectElems, { dropdownOptions: {container: document.body, constrainWidth: true }} );
+    
+    M.updateTextFields();
 }
 
 function editClient(clientId) {
