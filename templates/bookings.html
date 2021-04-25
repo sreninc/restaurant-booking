@@ -139,7 +139,7 @@
                 <td>{{ booking.status.capitalize() }}</td>
                 <td>€{{ booking.value }}</td>
                 <td><button onclick="editBooking('{{ booking.client_id }}', '{{ booking._id }}', '{{ booking.date }}', this.parentElement.parentElement.rowIndex)" class="btn-small blue accent-4">Edit</button></td>
-                <td><a href="{{ url_for('delete_booking', booking_id=booking._id, client_id=booking.client_id) }}" class="btn-small red accent-4">Delete</a></td>
+                <td><a href="{{ url_for('delete_booking', booking_id=booking._id, client_id=booking.client_id, booking_value=booking.value, booking_status=booking.status) }}" class="btn-small red accent-4">Delete</a></td>
             </tr>
         {% endfor %}
     </tbody>

@@ -87,22 +87,24 @@ def add_booking():
     return render_template("bookings.html")
 
 
-@app.route("/delete_booking/<booking_id>/<client_id>")
-def delete_booking(booking_id, client_id):
+@app.route("/delete_booking/<booking_id>/<client_id>/<booking_value>/<booking_status>")
+def delete_booking(booking_id, client_id, booking_value, booking_status):
     # find the client
     client = mongo.db.clients.find_one({"_id": ObjectId(client_id)})
-    # create the client array to update with the new booking number
-    client_array = {
-        "first_name": client["first_name"],
-        "last_name": client["last_name"],
-        "email": client["email"],
-        "mobile": client["mobile"],
-        "marketing_consent": client["marketing_consent"],
-        "bookings": client["bookings"] - 1,
-        "created_by": client["created_by"]
-    }
+    if booking_status == "completed":
+        bookings_completed = 1
+    else:
+        bookings_completed = 0
     # update the client
-    mongo.db.clients.update({"_id": ObjectId(client_id)}, client_array)
+    mongo.db.clients.update(
+                {"_id": ObjectId(client_id)},
+                {"$set": {
+                    "bookings": client["bookings"] - 1,
+                    "value": client["value"] - int(booking_value),
+                    "bookings_completed": client["bookings_completed"] - int(bookings_completed)
+                    }
+                }
+            )
     mongo.db.bookings.remove({"_id": ObjectId(booking_id)})
     flash("Booking Successfully Deleted")
     return redirect(url_for("get_bookings"))
