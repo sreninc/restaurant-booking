@@ -83,5 +83,131 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     {% block scripts %}
     {% endblock %}
+
+    <div class="fixed-action-btn">
+    <a class="btn-floating btn-large yellow">
+        <i class="fas fa-plus"></i>
+    </a>
+    <ul>
+        <li><a data-target="add-client-modal" class="modal-trigger btn-floating btn-large blue "><i class="fas fa-user-plus"></i></a></li>
+        <li><a data-target="add-booking-modal" class="modal-trigger btn-floating btn-large green"><i class="fas fa-calendar-plus"></i></a></li>
+    </ul>
+    </div>
+
+    <div id="add-client-modal" class="modal"> <!-- Begin add-client-modal -->
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12" id="add-client-form" method="POST" action="{{ url_for('add_client') }}"> <!-- Begin add client form -->
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="fas fa-user prefix"></i>
+                            <input id="add-client-firstname" name="add-client-firstname type="text" class="validate">
+                            <label for="add-client-firstname">
+                                First Name
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-user-friends prefix"></i>
+                            <input id="add-client-lastname" name="add-client-lastname type="text" class="validate">
+                            <label for="add-client-lastname">
+                                Last Name
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-envelope prefix"></i>
+                            <input id="add-client-email" name="add-client-email" type="email" class="validate">
+                            <label for="add-client-email">
+                                Email
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-phone prefix"></i>
+                            <input id="add-client-mobile" name="add-client-mobile" type="text" class="validate">
+                            <label for="add-client-mobile">
+                                Mobile
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <p>
+                            <label for="add-client-marketing">
+                                <input id="add-client-marketing" name="add-client-marketing" type="checkbox" />
+                                <span>Marketing Consent</span>
+                            </label>
+                            </p>
+                        </div>
+                    </div>
+                </form> <!-- End add-client-form -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button data-target="add-client-modal" class="btn modal-close" type="submit" form="add-client-form">Save</button>
+            <button data-target="add-client-modal" class="btn modal-close" type="reset" form="add-client-form">Cancel</button>
+        </div>
+    </div> <!-- End add-client-modal -->
+
+    <div id="add-booking-modal" class="modal"> <!-- Begin add-booking-modal -->
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12" id="add-booking-form" method="POST" action="{{ url_for('add_booking') }}"> <!-- Begin add-booking-form -->
+                    <div class="row"> 
+                        <div class="input-field col s6">
+                            <i class="fas fa-user prefix"></i>
+                            <select id="add-booking-client-id" name="add-booking-client-id" required>
+                                    <option value="">Select Client</option>
+                                {% for client in clients %}
+                                    <option value="{{ client._id }}">{{ client.first_name + " " + client.last_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="add-booking-client-id">Status</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-calendar-day prefix"></i>
+                            <input id="add-booking-date" name="add-booking-date" type="date" class="validate">
+                            <label for="add-booking-date">
+                                Date
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-clock prefix"></i>
+                            <input id="add-booking-time" name="add-booking-time" type="time" class="validate">
+                            <label for="add-booking-time">
+                                Time
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-users prefix"></i>
+                            <input id="add-booking-people" name="add-booking-people" type="number" class="validate">
+                            <label for="add-booking-people">
+                                People
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-clipboard prefix"></i>
+                            <select id="add-booking-status" name="status">
+                                <option value="booked" selected>Booked</option>
+                                <option value="waitlist">Waitlist</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="no-show">No Show</option>
+                                <option value="cancelled">Cancelled</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                            <label for="add-booking-status">Status</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-dollar-sign prefix"></i>
+                            <input id="add-booking-value" name="add-booking-value" type="number" class="validate">
+                            <label for="add-booking-value">
+                                Value
+                            </label>
+                        </div>
+                    </div>
+                </form> <!-- End add-booking-form -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button data-target="add-booking-modal" class="btn modal-close" type="submit" form="add-booking-form">Save</button>
+            <button data-target="add-booking-modal" class="btn modal-close" type="reset" form="add-booking-form">Cancel</button>
+        </div>
+    </div> <!-- End add-booking-modal -->
 </body>
 </html>
