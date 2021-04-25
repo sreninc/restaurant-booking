@@ -49,7 +49,7 @@
                     <div class="row"> 
                         <div class="input-field col s6">
                             <i class="fas fa-user prefix"></i>
-                            <select id="edit-booking-client-id" name="edit-booking-client-id" disabled>
+                            <select id="edit-booking-client-id" name="edit-booking-client-id">
                                     <option value="">Select Client</option>
                                 {% for client in clients %}
                                     <option value="{{ client._id }}">{{ client.first_name + " " + client.last_name }}</option>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="input-field col s6">
                             <i class="fas fa-clipboard prefix"></i>
-                            <select id="edit-booking-status" name="status">
+                            <select id="edit-booking-status" name="edit-booking-status">
                                 <option value="booked" selected>Booked</option>
                                 <option value="waitlist">Waitlist</option>
                                 <option value="confirmed">Confirmed</option>

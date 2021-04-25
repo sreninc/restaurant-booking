@@ -79,18 +79,58 @@ def add_booking():
     return render_template("bookings.html")
 
 
-@app.route("/edit_booking/<booking_id>")
-def edit_booking(booking_id):
+@app.route("/edit_booking", methods=["GET", "POST"])
+def edit_booking():
     if request.method == "POST":
-        booking = {
-            "client_id": request.form.get("clientId"),
-            "date": request.form.get("date"),
-            "time": request.form.get("time"),
-            "people": request.form.get("people"),
-            "status": request.form.get("status"),
-            "value": request.form.get("value"),
-            "created_by": session["email"]
-        }
+        # find the client
+        client = mongo.db.clients.find_one(
+            {"_id": ObjectId(request.form.get("edit-booking-client-id"))}
+        )
+        booking = mongo.db.bookings.find_one(
+            {"_id": ObjectId(request.form.get("edit-booking-id"))}
+        )
+
+        value = request.form.get("edit-booking-value")
+        bookings_completed = 0
+        old_value = 0
+        if request.form.get("edit-booking-status") == "completed" and booking["status"] != "completed":
+            bookings_completed = 1
+        elif request.form.get("edit-booking-status") != "completed" and booking["status"] == "completed":
+            old_value = booking["value"]
+            value = 0
+            bookings_completed = -1
+        elif request.form.get("edit-booking-status") == "completed" and booking["status"] == "completed":
+            old_value = booking["value"]
+
+        print(booking["value"])
+        print(old_value)
+        print(value)
+
+        # update the client
+        mongo.db.clients.update(
+                {"_id": ObjectId(request.form.get("edit-booking-client-id"))},
+                {"$set": {
+                    "value": client["value"] + int(value) - int(old_value),
+                    "bookings_completed": client["bookings_completed"] + int(bookings_completed)
+                    }
+                }
+            )
+
+        # update the booking
+        mongo.db.bookings.update(
+                {"_id": ObjectId(request.form.get("edit-booking-id"))},
+                {"$set": {
+                    "date": request.form.get("edit-booking-date"),
+                    "time": request.form.get("edit-booking-time"),
+                    "people": request.form.get("edit-booking-people"),
+                    "status": request.form.get("edit-booking-status"),
+                    "value": request.form.get("edit-booking-value"),
+                    "updated_by": session["email"],
+                    "updated_date": datetime.today()
+                    }
+                }
+            )
+        return redirect(url_for("get_bookings"))
     return render_template("bookings.html")
 
 
