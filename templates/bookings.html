@@ -6,12 +6,32 @@
     <div class="row card-panel grey lighten-5">
         <form action="" method="post" class="col s12">
             <div class="row valign-wrapper center-align">
-                <div class="input-field col s12 m8">
-                    <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
-                    <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                    <label for="query">Search Bookings</label>
+                <div class="input-field col s3">
+                    <input type="date" name="booking-date" id="booking-date" class="validate">
+                    <label for="booking-date">Booking Date:</label>
                 </div>
-                <div class="col s12 m4">
+                <div class="input-field col s3">
+                    <select id="client-name" name="client-name">
+                        <option value="">Select Client</option>
+                        {% for client in clients %}
+                                <option value="{{ client._id }}">{{ client.first_name + " " + client.last_name }}</option>
+                            {% endfor %}
+                    </select>
+                    <label for="client-name">Client Name</label>
+                </div>
+                <div class="input-field col s3">
+                    <select id="booking-status" name="booking-status">
+                        <option value="">Select Status</option>
+                        <option value="booked">Booked</option>
+                        <option value="waitlist">Waitlist</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="no-show">No Show</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <label for="booking-status">Booking Status</label>
+                </div>
+                <div class="col s3">
                     <a href="" class="red btn text-shadow">Reset</a>
                     <button type="submit" class="light-blue darken-1 btn text-shadow">
                         <i class="fas fa-search left"></i> Search
