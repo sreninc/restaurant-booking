@@ -85,10 +85,10 @@ function editClient(clientId) {
     email = email.innerHTML.trim();
     mobile = mobile.innerHTML.trim();
 
-    document.getElementById("firstName").value = firstName;
-    document.getElementById("lastName").value = lastName;
-    document.getElementById("email").value = email;
-    document.getElementById("mobile").value = mobile;
+    document.getElementById("edit-client-firstname").value = firstName;
+    document.getElementById("edit-client-lastname").value = lastName;
+    document.getElementById("edit-client-email").value = email;
+    document.getElementById("edit-client-mobile").value = mobile;
 
     M.updateTextFields();
 }

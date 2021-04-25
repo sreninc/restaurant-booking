@@ -21,126 +21,58 @@
         </form>
     </div>
 
-
-    <!-- Modal Trigger -->
-    <button data-target="addClient" class="btn modal-trigger">Add Client</button>
-        <!-- Modal Structure -->
-    <div id="addClient" class="modal">
-        <div class="modal-content">
-            <div class="row">
-                <form class="col s12" id="addClientForm" method="POST" action="{{ url_for('add_client') }}">
-                    <input type="hidden" id="editClient" name="editClient">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <i class="fas fa-user prefix"></i>
-                        <input id="firstName" name="firstName" type="text" class="validate">
-                        <label for="firstName">
-                            First Name
-                        </label>
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="fas fa-user-friends prefix"></i>
-                        <input id="lastName" name="lastName" type="text" class="validate">
-                        <label for="lastName">
-                            Last Name
-                        </label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <i class="fas fa-envelope prefix"></i>
-                        <input id="email" name="email" type="text" class="validate">
-                        <label for="email">
-                            Email
-                        </label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <i class="fas fa-phone prefix"></i>
-                        <input id="mobile" name="mobile" type="text" class="validate">
-                        <label for="mobile">
-                            Mobile
-                        </label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <p>
-                        <label>
-                            <input id="marketingConsent" name="marketingConsent" type="checkbox" />
-                            <span>Marketing Consent</span>
-                        </label>
-                        </p>
-                    </div>
-
-                </div>
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button data-target="addBooking" class="btn modal-close" type="submit" form="addClientForm">Save</button>
-            <button data-target="addBooking" class="btn modal-close" type="reset" form="addClientForm">Cancel</button>
-        </div>
-    </div>
-
     <!-- Modal Structure -->
-    <div id="addBooking" class="modal">
+    <div id="edit-client-modal" class="modal"> <!-- Begin edit-client-modal -->
         <div class="modal-content">
             <div class="row">
-                <form class="col s12" id="addBookingForm" method="POST" action="{{ url_for('add_booking') }}">
-                <div class="row">
-                    <input id="clientId" name="clientId" type="hidden" />
-                    <div class="input-field col s6">
-                        <i class="fas fa-calendar-day prefix"></i>
-                        <input id="date" name="date" type="date" class="validate">
-                        <label for="date">
-                            Date
-                        </label>
+                <form class="col s12" id="edit-client-form" method="POST" action="{{ url_for('edit_client') }}"> <!-- Begin edit-client-form -->
+                    <input type="hidden" id="editClient" name="editClient">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="fas fa-user prefix"></i>
+                            <input id="edit-client-firstname" name="edit-client-firstname" type="text" class="validate">
+                            <label for="edit-client-firstname">
+                                First Name
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-user-friends prefix"></i>
+                            <input id="edit-client-lastname" name="edit-client-lastname" type="text" class="validate">
+                            <label for="edit-client-lastname">
+                                Last Name
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-envelope prefix"></i>
+                            <input id="edit-client-email" name="edit-client-email" type="text" class="validate">
+                            <label for="edit-client-email">
+                                Email
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-phone prefix"></i>
+                            <input id="edit-client-mobile" name="edit-client-mobile" type="text" class="validate">
+                            <label for="edit-client-mobile">
+                                Mobile
+                            </label>
+                        </div>
+                        <div class="input-field col s6">
+                            <p>
+                            <label for="edit-client-marketing">
+                                <input id="edit-client-marketing" name="edit-client-marketing" type="checkbox" />
+                                <span>Marketing Consent</span>
+                            </label>
+                            </p>
+                        </div>
                     </div>
-
-                    <div class="input-field col s6">
-                        <i class="fas fa-clock prefix"></i>
-                        <input id="time" name="time" type="time" class="validate">
-                        <label for="time">
-                            Time
-                        </label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <i class="fas fa-users prefix"></i>
-                        <input id="people" name="people" type="number" class="validate">
-                        <label for="people">
-                            People
-                        </label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <i class="fas fa-clipboard prefix"></i>
-                        <select id="status" name="status">
-                        <option value="booked" selected>Booked</option>
-                        <option value="waitlist">Waitlist</option>
-                        <option value="confirmed">Confirmed</option>
-                        <option value="no-show">No Show</option>
-                        <option value="cancelled">Cancelled</option>
-                        <option value="completed">Completed</option>
-                        </select>
-                        <label>Status</label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <i class="fas fa-dollar-sign prefix"></i>
-                        <input id="value" name="value" type="number" class="validate">
-                        <label for="value">
-                            Value
-                        </label>
-                    </div>
-                </div>
-                </form>
+                </form> <!-- End edit-client-form -->
             </div>
         </div>
         <div class="modal-footer">
-            <button data-target="addBooking" class="btn modal-close" type="submit" form="addBookingForm">Save</button>
-            <button data-target="addBooking" class="btn modal-close" type="reset" form="addBookingForm">Cancel</button>
+            <button data-target="edit-client-modal" class="btn modal-close" type="submit" form="edit-client-form">Save</button>
+            <button data-target="edit-client-modal" class="btn modal-close" type="reset" form="edit-client-form">Cancel</button>
         </div>
-    </div>
+    </div> <!-- End edit-client-modal -->
 
     {% if clients|length > 0 %}
     <ul class="collapsible">
@@ -195,7 +127,7 @@
         {% endfor %}
     </ul>
     {% else %}
-        <h3 class="red-text text-darken-4 center-align">No Bookings Found</h3>
+        <h3 class="red-text text-darken-4 center-align">No Clients Found</h3>
     {% endif %}
 
 {% endblock %}

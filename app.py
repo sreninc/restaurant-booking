@@ -163,6 +163,11 @@ def add_client():
     return render_template("clients.html")
 
 
+@app.route("/edit_client")
+def edit_client():
+    return render_template("clients.html")
+
+
 @app.route("/delete_client/<client_id>")
 def delete_client(client_id):
     mongo.db.clients.remove({"_id": ObjectId(client_id)})
