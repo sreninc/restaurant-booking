@@ -24,16 +24,6 @@ var elems = document.querySelectorAll('select');
 var instances = M.FormSelect.init(elems, { dropdownOptions: {container: document.body, constrainWidth: true }} );
 });
 
-function addBooking(clientId) {
-    document.getElementById("clientId").value = clientId;
-    if (document.getElementById("clientSelect")) {
-        document.getElementById("clientSelect").style.display = "block";
-    }
-    var elem = document.querySelectorAll('.modal')[1];
-    var instance = M.Modal.getInstance(elem);
-    instance.open();
-}
-
 function editBooking(client_id, booking_id, booking_date, parent) {
     const row = document.getElementById("bookings-table").rows[parent].cells;
 
