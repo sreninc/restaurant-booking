@@ -45,27 +45,32 @@ def add_booking():
     if request.method == "POST":
         if request.form.get("status") == "completed":
             bookings_completed = 1
-            print("yes")
         else:
             bookings_completed = 0
-            print("no")
         # find the client
-        client = mongo.db.clients.find_one({"_id": ObjectId(request.form.get("clientId"))})
-        # create the client array to update with the new booking number
-        client_array = {
-            "first_name": client["first_name"],
-            "last_name": client["last_name"],
-            "email": client["email"],
-            "mobile": client["mobile"],
-            "marketing_consent": client["marketing_consent"],
-            "bookings": client["bookings"] + 1,
-            "bookings_completed": client["bookings_completed"] + int(bookings_completed),
-            "value": client["value"] + int(request.form.get("value")),
-            "created_by": client["created_by"],
-            "created_date": client["created_date"]
-        }
+        client = mongo.db.clients.find_one(
+            {"_id": ObjectId(request.form.get("clientId"))}
+        )
         # update the client
-        mongo.db.clients.update({"_id": ObjectId(request.form.get("clientId"))}, client_array)
+        if request.form.get("booking_id"):  
+            mongo.db.clients.update(
+                    {"_id": ObjectId(request.form.get("clientId"))},
+                    {"$set": {
+                        "bookings": client["bookings"] + 1,
+                        "bookings_completed": client["bookings_completed"] + int(bookings_completed),
+                        "value": client["value"] + int(request.form.get("value"))
+                        }
+                    }
+                )
+        else:
+            mongo.db.clients.update(
+                {"_id": ObjectId(request.form.get("clientId"))},
+                {"$set": {
+                    "bookings_completed": client["bookings_completed"] + int(bookings_completed),
+                    "value": client["value"] + int(request.form.get("value"))
+                    }
+                }
+            )
         booking = {
             "client_id": request.form.get("clientId"),
             "date": request.form.get("date"),
