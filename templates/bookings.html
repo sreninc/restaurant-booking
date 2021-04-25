@@ -44,11 +44,12 @@
     <div id="edit-booking-modal" class="modal"> <!-- Begin edit-booking-modal -->
         <div class="modal-content">
             <div class="row">
-                <form class="col s12" id="edit-booking-form" method="POST" action="{{ url_for('add_booking') }}"> <!-- Begin edit-booking-form -->
+                <form class="col s12" id="edit-booking-form" method="POST" action="{{ url_for('edit_booking') }}"> <!-- Begin edit-booking-form -->
+                    <input type="hidden" id="edit-booking-id" name="edit-booking-id">
                     <div class="row"> 
                         <div class="input-field col s6">
                             <i class="fas fa-user prefix"></i>
-                            <select id="edit-booking-client-id" name="edit-booking-client-id" required>
+                            <select id="edit-booking-client-id" name="edit-booking-client-id" disabled>
                                     <option value="">Select Client</option>
                                 {% for client in clients %}
                                     <option value="{{ client._id }}">{{ client.first_name + " " + client.last_name }}</option>

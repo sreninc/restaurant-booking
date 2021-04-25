@@ -27,21 +27,20 @@ var instances = M.FormSelect.init(elems, { dropdownOptions: {container: document
 function editBooking(client_id, booking_id, booking_date, parent) {
     const row = document.getElementById("bookings-table").rows[parent].cells;
 
-    document.getElementById("date").value = booking_date;
-    console.log(booking_date);
-    document.getElementById("time").value = row[1].innerHTML;
-    document.getElementById("people").value = row[3].innerHTML;
-    document.getElementById("value").value = row[5].innerHTML.split("€")[1];
+    document.getElementById("edit-booking-date").value = booking_date;
+    document.getElementById("edit-booking-time").value = row[1].innerHTML;
+    document.getElementById("edit-booking-people").value = row[3].innerHTML;
+    document.getElementById("edit-booking-value").value = row[5].innerHTML.split("€")[1];
 
-    var selectStatus = document.getElementById("status").options;
+    var selectStatus = document.getElementById("edit-booking-status").options;
     for (i = 0; i < selectStatus.length; i++) {
         if (selectStatus[i].value == row[4].innerHTML.toLowerCase()) {
             selectStatus[i].selected = true;
         }
     }
 
-    document.getElementById("booking_id").value = booking_id;
-    var select = document.getElementById("clientId").options;
+    document.getElementById("edit-booking-id").value = booking_id;
+    var select = document.getElementById("edit-booking-client-id").options;
     for (i = 0; i < select.length; i++) {
         if (select[i].value == client_id) {
             select[i].selected = true;
