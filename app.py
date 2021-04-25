@@ -125,38 +125,21 @@ def search_clients():
 
 @app.route("/add_client", methods=["GET", "POST"])
 def add_client():
-    print(request.form.get("editClient"))
     if request.method == "POST":
-        marketing_consent = "on" if request.form.get("marketingConsent") else "off"
-        print(request.form.get("clientId"))
-        if request.form.get("editClient"):
-            mongo.db.clients.update(
-                {"_id": ObjectId(request.form.get("editClient"))},
-                {"$set": {
-                    "first_name": request.form.get("firstName").capitalize(),
-                    "last_name": request.form.get("lastName"),
-                    "email": request.form.get("email").lower(),
-                    "mobile": request.form.get("mobile"),
-                    "marketing_consent": marketing_consent,
-                    "updated_by": session["email"],
-                    "updated_date": datetime.today()
-                    }
-                }
-            )
-        else:
-            client = {
-                "first_name": request.form.get("firstName").capitalize(),
-                "last_name": request.form.get("lastName").capitalize(),
-                "email": request.form.get("email").lower(),
-                "mobile": request.form.get("mobile"),
-                "marketing_consent": marketing_consent,
-                "bookings": 0,
-                "bookings_completed": 0,
-                "value": 0,
-                "created_by": session["email"],
-                "created_date": datetime.today()
-            }
-            mongo.db.clients.insert_one(client)
+        marketing_consent = "on" if request.form.get("add-client-marketing") else "off"
+        client = {
+            "first_name": request.form.get("add-client-firstname").capitalize(),
+            "last_name": request.form.get("add-client-lastname"),
+            "email": request.form.get("add-client-email").lower(),
+            "mobile": request.form.get("add-client-mobile"),
+            "marketing_consent": marketing_consent,
+            "bookings": 0,
+            "bookings_completed": 0,
+            "value": 0,
+            "created_by": session["email"],
+            "created_date": datetime.today()
+        }
+        mongo.db.clients.insert_one(client)
         flash("Client Successfully Added")
         return redirect(url_for("get_clients"))
 
@@ -180,8 +163,9 @@ def edit_client():
                     }
                 }
             )
+        flash("Client Successfully Edited")
         return redirect(url_for("get_clients"))
-        
+
     return render_template("clients.html")
 
 
