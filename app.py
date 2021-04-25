@@ -127,10 +127,12 @@ def add_client():
                 {"_id": ObjectId(request.form.get("editClient"))},
                 {"$set": {
                     "first_name": request.form.get("firstName").capitalize(),
-                    "last_name": request.form.get("lastName").capitalize(),
+                    "last_name": request.form.get("lastName"),
                     "email": request.form.get("email").lower(),
                     "mobile": request.form.get("mobile"),
-                    "marketing_consent": marketing_consent
+                    "marketing_consent": marketing_consent,
+                    "updated_by": session["email"],
+                    "updated_date": datetime.today()
                     }
                 }
             )
