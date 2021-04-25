@@ -52,11 +52,10 @@ def add_booking():
             {"_id": ObjectId(request.form.get("clientId"))}
         )
         # update the client
-        if request.form.get("booking_id"):  
+        if request.form.get("booking_id"):
             mongo.db.clients.update(
                     {"_id": ObjectId(request.form.get("clientId"))},
                     {"$set": {
-                        "bookings": client["bookings"] + 1,
                         "bookings_completed": client["bookings_completed"] + int(bookings_completed),
                         "value": client["value"] + int(request.form.get("value"))
                         }
@@ -66,6 +65,7 @@ def add_booking():
             mongo.db.clients.update(
                 {"_id": ObjectId(request.form.get("clientId"))},
                 {"$set": {
+                    "bookings": client["bookings"] + 1,
                     "bookings_completed": client["bookings_completed"] + int(bookings_completed),
                     "value": client["value"] + int(request.form.get("value"))
                     }
