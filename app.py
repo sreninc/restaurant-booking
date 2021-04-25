@@ -87,6 +87,21 @@ def add_booking():
     return render_template("bookings.html")
 
 
+@app.route("/edit_booking/<booking_id>")
+def edit_booking(booking_id):
+    if request.method == "POST":
+        booking = {
+            "client_id": request.form.get("clientId"),
+            "date": request.form.get("date"),
+            "time": request.form.get("time"),
+            "people": request.form.get("people"),
+            "status": request.form.get("status"),
+            "value": request.form.get("value"),
+            "created_by": session["email"]
+        }
+    return render_template("bookings.html")
+
+
 @app.route("/delete_booking/<booking_id>/<client_id>/<booking_value>/<booking_status>")
 def delete_booking(booking_id, client_id, booking_value, booking_status):
     # find the client
