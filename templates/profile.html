@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h1>Profile</h1>
+    <h1 class="center-align">Profile</h1>
 
     <div class="row">
-        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('signup') }}">
+        <form class="col s6 offset-s3" method="POST" action="{{ url_for('signup') }}">
             <div class="card-panel">
             {% for data in user %}
                 <!-- username -->
@@ -44,7 +44,7 @@
                 </div>
                 <!-- signup -->
                 <div class="row">
-                    <button type="submit" class="col s12 btn-large light-blue darken-4 text-shadow">
+                    <button type="submit" class="col s12 btn-large green text-shadow">
                         Update <i class="fas fa-sign-in-alt"></i>
                     </button>
                 </div>
