@@ -58,3 +58,9 @@ main {
 .client-collapsible {
     padding: 15px!important;
 }
+
+#contact-form {
+    width: 50%;
+    margin: auto;
+    padding-bottom: 20px;
+}
