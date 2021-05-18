@@ -1,56 +1,76 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h1 class="center-align">Profile</h1>
+    <h1 class="center-align mt-48">Profile</h1>
 
-    <div class="row">
-        <form class="col s6 offset-s3" method="POST" action="{{ url_for('signup') }}">
-            <div class="card-panel">
-            {% for data in user %}
-                <!-- username -->
-                <div class="row">
-					<div class="input-field col s12">
-						<i class="fas fa-user-plus prefix light-blue-text text-darken-4"></i>
-						<input id="email" name="email" type="email" class="validate" value="{{ data.email }}" required>
-						<label for="email">email</label>
-					</div>
-                </div>
-                <!-- password -->
-                <div class="row">
-                    <div class="input-field col s12">
-						<i class="fas fa-user-lock prefix light-blue-text text-darken-4"></i>
-                        <input id="password" name="password" type="password" minlength="5"
-                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
-                        <label for="password">Password</label>
-                    </div>
-                </div>
-                <!-- name -->
-                <div class="row">
-                    <div class="input-field col s12">
-						<i class="fas fa-user-tag prefix light-blue-text text-darken-4"></i>
-                        <input id="name" name="name" type="text" minlength="2"
-                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" value="{{ data.name }}" required>
-                        <label for="name">Name</label>
-                    </div>
-                </div>
-                <!-- restaurant name -->
-                <div class="row">
-                    <div class="input-field col s12">
-						<i class="fas fa-home prefix light-blue-text text-darken-4"></i>
-                        <input id="restaurant-name" name="restaurant-name" type="text" minlength="2"
-                            maxlength="25" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" value="{{ data.restaurant_name }}" required>
-                        <label for="restaurant-name">Restaurant Name</label>
-                    </div>
-                </div>
-                <!-- signup -->
-                <div class="row">
-                    <button type="submit" class="col s12 btn-large green text-shadow">
-                        Update <i class="fas fa-sign-in-alt"></i>
-                    </button>
-                </div>
-            {% endfor %}
+<div class="card mt-48">
+    <div class="card-header bg-white">
+        <div class="row align-items-center">
+            <div class="col">
+            <h4 class="mb-0">
+                Your Team
+            </h4>
             </div>
-        </form>
+            <div class="col-auto">
+            <button class="btn btn-xs btn-primary">
+                Add
+            </button>
+            </div>
+        </div>
     </div>
+    <div class="card-body">
+        <div class="list-group list-group-flush">
+            {% for data in user %}
+            <div class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                    <!-- Avatar -->
+                        <div class="avatar avatar-xl">
+                            <img class="avatar-img rounded-circle" src="{{ url_for('static', filename='img/user_icon.jpg') }}" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-6 ms-n5">
+                        <p class="mb-0">
+                            {{ data.name }}
+                        </p>
+                        <a class="d-block small text-truncate text-gray-700" href="mailto:{{ data.email }}">
+                            {{ data.email }}
+                        </a>
+                    </div>
+                    <div class="col-auto ms-auto">
+                        <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true" aria-expanded="false">
+                            <div class="form-select form-select-xs">
+                                <select class="form-select form-select-xs form-control" data-choices="" hidden="" tabindex="-1" data-choice="active">
+                                    <option value="Admin">
+                                        Admin
+                                    </option>
+                                </select>
+                                <div class="choices__list choices__list--single">
+                                    <div class="choices__item choices__item--selectable" data-item="" data-id="1" data-value="Admin" data-custom-properties="null" aria-selected="true">
+                                        Admin
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="choices__list dropdown-menu" aria-expanded="false">
+                                <div class="choices__list" role="listbox">
+                                    <div id="choices--mq6b-item-choice-1" class="choices__item dropdown-item active choices__item--selectable is-highlighted" role="option" data-choice="" data-id="1" data-value="Admin" data-select-text="Press to select" data-choice-selectable="" aria-selected="true">
+                                        Admin
+                                    </div>
+                                    <div id="choices--mq6b-item-choice-2" class="choices__item dropdown-item choices__item--selectable" role="option" data-choice="" data-id="2" data-value="Staff" data-select-text="Press to select" data-choice-selectable="">
+                                        Staff
+                                    </div>
+                                    <div id="choices--mq6b-item-choice-3" class="choices__item dropdown-item choices__item--selectable" role="option" data-choice="" data-id="3" data-value="Custom" data-select-text="Press to select" data-choice-selectable="">
+                                        Custom
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}
