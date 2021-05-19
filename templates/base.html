@@ -43,19 +43,6 @@
     </nav>
     </header>
 
-    <section>
-        <!-- flash messages -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="row flashes">
-                        <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </section>
-
     <main class="container">
         {% block content %}
         {% endblock %}
@@ -200,7 +187,13 @@
     {% endif %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}<script>generateFlashMessage("{{ message }}");</script>{% endfor %}
+            {% endif %}
+        {% endwith %}
     {% block scripts %}
     {% endblock %}
 </body>
