@@ -6,28 +6,21 @@
     <div class="row">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login') }}">
             <div class="card-panel">
-                <!-- email -->
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="fas fa-user-cog prefix light-blue-text text-darken-4"></i>
-                        <input id="email" name="email" type="email" class="validate" required>
-                        <label for="email">Email</label>
-                    </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" />
+                    <label for="email">
+                        Email address
+                    </label>
                 </div>
-                <!-- password -->
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="fas fa-user-lock prefix light-blue-text text-darken-4"></i>
-                        <input id="password" name="password" type="password" minlength="5"
-                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
-                        <label for="password">Password</label>
-                    </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" placeholder="Password" />
+                    <label for="password">
+                        Password
+                    </label>
                 </div>
                 <!-- login -->
-                <div class="row">
-                    <button type="submit" class="col s12 btn-large light-blue darken-4 text-shadow">
-                        Log In <i class="fas fa-sign-in-alt"></i>
-                    </button>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Login</button>
                 </div>
             </div>
         </form>
