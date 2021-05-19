@@ -2,8 +2,20 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    padding-top: 4.5rem;
 }
 
+.bd-example {
+    position: relative;
+    margin: 1rem -.75rem 0;
+    border: solid #dee2e6;
+    padding: 1.5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: 1px;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
 main {
     flex: 1 0 auto;
 }

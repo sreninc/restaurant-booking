@@ -3,36 +3,24 @@
 
 <h1>Login</h1>
 
-    <div class="row">
-        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login') }}">
-            <div class="card-panel">
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com" />
-                    <label for="email">
-                        Email address
-                    </label>
-                </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="password" placeholder="Password" />
-                    <label for="password">
-                        Password
-                    </label>
-                </div>
-                <!-- login -->
-                <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Login</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="row">
-        <div class="col s12">
-            <p class="center-align">
-                New Here?
-                <a href="{{ url_for('signup') }}" class="light-blue-text text-darken-4">Register Account</a>
-            </p>
+<div class="bd-example">
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div> 
+
+<p class="mt-4">
+    Don't have an account yet?
+    <a href="{{ url_for('signup') }}">Register Account</a>
+</p>
 
 {% endblock %}
