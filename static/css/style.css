@@ -90,3 +90,9 @@ main {
     width: 4rem;
 }
 
+.avatar {
+    font-size: 1rem;
+    height: 2rem;
+    width: 2rem;
+}
+
