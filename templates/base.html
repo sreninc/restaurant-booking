@@ -11,7 +11,7 @@
     {% endblock %}
     <title>Restaurant Bookings</title>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 
     <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -48,18 +48,18 @@
         {% endblock %}
     </main>
 
-    <footer>
-        <div class="container mx-auto w-25 d-flex justify-content-center">
-            <a class="grey-text text-lighten-4 right" href="https://www.facebook.com"><i class="fab fa-facebook-square small footer-icons"></i></a>
-            <a class="grey-text text-lighten-4 right" href="https://www.instagram.com"><i class="fab fa-instagram-square small footer-icons"></i></a>
-            <a class="grey-text text-lighten-4 right" href="https://www.twitter.com"><i class="fab fa-twitter-square small footer-icons"></i></a>
-            <a class="grey-text text-lighten-4 right" href="https://www.linkedin.com"><i class="fab fa-linkedin small footer-icons"></i></a>
-            <a class="grey-text text-lighten-4 right" href="https://www.pinterest.com"><i class="fab fa-pinterest-square small footer-icons"></i></a>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container mx-auto w-25 d-flex justify-content-center fs-1">
+            <a href="https://www.facebook.com"><i class="fab fa-facebook-square small footer-icons"></i></a>
+            <a href="https://www.instagram.com"><i class="fab fa-instagram-square small footer-icons"></i></a>
+            <a href="https://www.twitter.com"><i class="fab fa-twitter-square small footer-icons"></i></a>
+            <a href="https://www.linkedin.com"><i class="fab fa-linkedin small footer-icons"></i></a>
+            <a href="https://www.pinterest.com"><i class="fab fa-pinterest-square small footer-icons"></i></a>
         </div>
     </footer>
 
     {% if session.email %}
-        <div class="fixed-action-btn">
+        <div class="fixed-action-btn"  style="display:none;">
         <a class="btn-floating btn-large deep-orange accent-3">
             <i class="fas fa-plus"></i>
         </a>
@@ -69,7 +69,7 @@
         </ul>
         </div>
 
-        <div id="add-client-modal" class="modal"> <!-- Begin add-client-modal -->
+        <div id="add-client-modal" class="modal" style="display:none;"> <!-- Begin add-client-modal -->
             <div class="modal-content">
                 <div class="row">
                     <form class="col s12" id="add-client-form" method="POST" action="{{ url_for('add_client') }}"> <!-- Begin add client form -->
@@ -120,7 +120,7 @@
             </div>
         </div> <!-- End add-client-modal -->
 
-        <div id="add-booking-modal" class="modal"> <!-- Begin add-booking-modal -->
+        <div id="add-booking-modal" class="modal" style="display:none;"> <!-- Begin add-booking-modal -->
             <div class="modal-content">
                 <div class="row">
                     <form class="col s12" id="add-booking-form" method="POST" action="{{ url_for('add_booking') }}"> <!-- Begin add-booking-form -->
