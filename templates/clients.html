@@ -27,7 +27,11 @@
                     <div class="col-sm-1">
                     <!-- Avatar -->
                         <div class="avatar">
-                            <img class="avatar-img rounded-circle" src="{{ url_for('static', filename='img/user_icon.jpg') }}" alt="...">
+                            {% if client.image %}
+                                <img class="avatar-img rounded-circle" src="{{ url_for('static', filename='img/user_icon.jpg') }}" alt="...">
+                            {% else %}
+                                <i class="far fa-user-circle avatar-empty"></i>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-sm-4 ms-n5">
