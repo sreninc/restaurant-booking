@@ -44,10 +44,13 @@
                             {{ client.mobile }}
                         </p>
                     </div>
-                    <div class="col-sm-4 ms-n5">
+                    <div class="col-sm-3 ms-n5">
                         <p class="mb-0 text-truncate">
                             {{ client.email }}
                         </p>
+                    </div>
+                    <div class="col-sm-1 ms-n5">
+                        <a class="btn btn-sm btn-outline-success" href="{{ url_for('guest_details', client_id=client._id) }}">Edit</a>
                     </div>
                 </div>
             </div>

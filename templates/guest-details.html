@@ -1,133 +1,171 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Clients</h1>
-
-    <div class="row card-panel grey lighten-5">
-        <form class="col s12" action="{{ url_for('search_clients') }}" method="post">
-            <div class="row valign-wrapper center-align">
-                <div class="input-field col s12 m8">
-                    <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
-                    <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                    <label for="query">Search Clients</label>
-                </div>
-                <div class="col s12 m4">
-                    <a href="{{ url_for('get_clients') }}" class="red btn text-shadow">Reset</a>
-                    <button type="submit" class="light-blue darken-1 btn text-shadow">
-                        <i class="fas fa-search left"></i> Search
-                    </button>
-                </div>
-            </div>
-        </form>
+<div class="row mb-4">
+    <div class="col">
+        <h1>Guest Details</h1>
     </div>
+    <div class="col d-flex justify-content-end">
+        <button type="reset"class="btn btn-danger align-self-end mx-2">Delete Client</button>
+        <button type="submit" class="btn btn-primary align-self-end">Add Booking</button>
+    </div>
+</div>
 
-    <!-- Modal Structure -->
-    <div id="edit-client-modal" class="modal"> <!-- Begin edit-client-modal -->
-        <div class="modal-content">
-            <div class="row">
-                <form class="col s12" id="edit-client-form" method="POST" action="{{ url_for('edit_client') }}"> <!-- Begin edit-client-form -->
-                    <input type="hidden" id="editClient" name="editClient">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <i class="fas fa-user prefix"></i>
-                            <input id="edit-client-firstname" name="edit-client-firstname" type="text" class="validate">
-                            <label for="edit-client-firstname">
-                                First Name
-                            </label>
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="fas fa-user-friends prefix"></i>
-                            <input id="edit-client-lastname" name="edit-client-lastname" type="text" class="validate">
-                            <label for="edit-client-lastname">
-                                Last Name
-                            </label>
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="fas fa-envelope prefix"></i>
-                            <input id="edit-client-email" name="edit-client-email" type="text" class="validate">
-                            <label for="edit-client-email">
-                                Email
-                            </label>
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="fas fa-phone prefix"></i>
-                            <input id="edit-client-mobile" name="edit-client-mobile" type="text" class="validate">
-                            <label for="edit-client-mobile">
-                                Mobile
-                            </label>
-                        </div>
-                        <div class="input-field col s6">
-                            <p>
-                            <label for="edit-client-marketing">
-                                <input id="edit-client-marketing" name="edit-client-marketing" type="checkbox" />
-                                <span>Marketing Consent</span>
-                            </label>
-                            </p>
-                        </div>
-                    </div>
-                </form> <!-- End edit-client-form -->
+
+<div class="row d-flex justify-content-center justify-content-lg-between">
+
+<form class="row gx-3 align-items-center border border-black col-12 col-lg-8 mb-4 py-2">
+    <div class="col-auto">
+        <label for="firstName" class="form-label">
+            First Name
+        </label>
+        <input type="text" id="firstName" name="firstName" class="form-control" value="{{ guest.first_name or '' }}" required />
+    </div>
+    <div class="col-auto">
+        <label for="lastName" class="form-label">
+            Last Name
+        </label>
+        <input type="text" id="lastName" name="lastName" class="form-control" value="{{ guest.last_name or '' }}" required />
+    </div>
+    <div class="col-auto">
+        <label for="email" class="form-label">
+            Email
+        </label>
+        <input type="email" id="email" name="email" class="form-control" value="{{ guest.email or '' }}" required />
+    </div>
+    <div class="col-auto">
+        <label for="mobile" class="form-label">
+            Mobile
+        </label>
+        <input type="number" id="mobile" name="mobile" class="form-control" value="{{ guest.mobile or '' }}" required />
+    </div>
+    <div class="col-auto">
+        <label for="dob" class="form-label">
+            Date of Birth
+        </label>
+        <input type="date" id="dob" name="dob" class="form-control" value="{{ guest.dob.strftime('%Y-%m-%d') if guest.dob else '' }}" />
+    </div>
+    <div class="col-auto">
+        <label for="clientSince" class="form-label">
+            Client Since
+        </label>
+        <input type="date" id="clientSince" name="clientSince" class="form-control" value="{{ guest.created_date.strftime('%Y-%m-%d') or '' }}" />
+    </div>
+    <div class="col-auto">
+        <label for="marketingConsent" class="form-check-label">
+            Marketing Consent
+        </label>
+        <input type="checkbox" id="marketingConsent" name="marketingConsent" class="form-check-input" value="{{ guest.marketing_consent or '' }}" />
+    </div>
+    <div class="col-auto">
+        <label for="notes" class="form-label">
+            Guest Notes
+        </label>
+        <textarea id="notes" name="notes" class="form-control" value="{{ guest.notes or '' }}"></textarea>
+    </div>
+</form>
+
+<div class="mb-4" style="width: 18rem;">
+    <div class="card-header">
+        Client Stats
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                Bookings Made:
             </div>
-        </div>
-        <div class="modal-footer">
-            <button data-target="edit-client-modal" class="btn modal-close" type="submit" form="edit-client-form">Save</button>
-            <button data-target="edit-client-modal" class="btn modal-close" type="reset" form="edit-client-form">Cancel</button>
-        </div>
-    </div> <!-- End edit-client-modal -->
+            <div>
+                {{ guest.bookings or 0 }}
+            </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                Completed: 
+            </div>
+            <div>
+                {{ guest.bookings_completed or 0 }}
+            </div>
+        </li>
 
-    {% if clients|length > 0 %}
-    <ul class="collapsible">
-        {% for client in clients %}
-            <li>
-                <div class="collapsible-header">
-                    <table class="clients-table">
-                        <tr>
-                            <td id="{{ client._id }}">
-                                <i class="fas fa-plus"></i>
-                            </td>
-                            <td>
-                                {{ client.first_name }}
-                            </td>
-                            <td>
-                                {{ client.last_name }}
-                            </td>
-                            <td>
-                                {{ client.mobile }}
-                            </td>
-                            <td>
-                                {{ client.email }}
-                            </td>
-                            <td>
-                                <button onclick="addBooking('{{ client._id }}')" class="btn-small blue accent-4">+ Booking</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="collapsible-body row">
-                    <div class="col s6 client-collapsible">
-                        Marketing Consent: {% if client.marketing_consent == "on" %}Yes {% else %} No {% endif %}
-                    </div>
-                    <div class="col s6 client-collapsible">
-                        Client Since: {{ client.created_date.strftime('%d-%m-%Y') }}
-                    </div>
-                    <div class="col s6 client-collapsible">
-                        Bookings Made: {{ client.bookings }}
-                    </div>
-                    <div class="col s6 client-collapsible">
-                        Bookings Completed: {{ client.bookings_completed }}
-                    </div>
-                    <div class="col s6 client-collapsible">
-                        Client Value: €{{ client.value }}
-                    </div>
-                    <div class="col s6 client-collapsible">
-                        <button onclick="editClient('{{ client._id }}')" class="btn-small green accent-4">Edit</button>
-                        <a href="{{ url_for('delete_client', client_id=client._id) }}" class="btn-small red accent-4" {% if client.bookings > 0 %}disabled{% endif %}>Delete</a>
-                    </div>
-                </div>
-            </li>
-        {% endfor %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                No Shows:
+            </div>
+            <div>
+                {{ guest.no_shows or 0 }}
+            </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                Cancellations: 
+            </div>
+            <div>
+                {{ guest.cancellations or 0 }}
+            </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                Waitlist: 
+            </div>
+            <div>
+                {{ guest.waitlist or 0 }}
+            </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                Confirmed: 
+            </div>
+            <div>
+                {{ guest.confirmed or 0 }}
+            </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                Booked: 
+            </div>
+            <div>
+                {{ guest.booked or 0 }}
+            </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                Booking Value:
+            </div>
+            <div>
+                €{{ guest.value or 0 }}
+            </div>
+        </li>
     </ul>
-    {% else %}
-        <h3 class="red-text text-darken-4 center-align">No Clients Found</h3>
-    {% endif %}
+</div>
 
+</div>
+
+{% if bookings|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">People</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.date }}</td>
+                <td>{{ booking.time }}</td>
+                <td>{{ booking.people }}</td>
+                <td>{{ booking.status.capitalize() }}</td>
+                <td><button onclick="editBooking('{{ booking.client_id }}', '{{ booking._id }}', '{{ booking.date }}', this.parentElement.parentElement.rowIndex)" class="btn btn-outline-primary">Edit</button></td>
+                <td><button class="btn btn-outline-danger">Delete</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <h3 class="red-text text-darken-4 center-align">No Bookings Found</h3>
+{% endif %}
 {% endblock %}

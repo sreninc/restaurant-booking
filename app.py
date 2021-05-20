@@ -258,6 +258,15 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/guest-details/<client_id>")
+def guest_details(client_id):
+    guest = mongo.db.clients.find_one(
+            {"_id": ObjectId(client_id)})
+    bookings = list(mongo.db.bookings.find(
+        {"client_id": client_id}))
+    return render_template("guest-details.html", guest=guest, bookings=bookings)
+
+
 @app.route("/profile/<email>", methods=["GET", "POST"])
 def profile(email):
     # grab the session user's email from db
