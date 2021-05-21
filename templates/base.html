@@ -69,57 +69,6 @@
         </ul>
         </div>
 
-        <div id="add-client-modal" class="modal" style="display:none;"> <!-- Begin add-client-modal -->
-            <div class="modal-content">
-                <div class="row">
-                    <form class="col s12" id="add-client-form" method="POST" action="{{ url_for('add_client') }}"> <!-- Begin add client form -->
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <i class="fas fa-user prefix"></i>
-                                <input id="add-client-firstname" name="add-client-firstname" type="text" class="validate">
-                                <label for="add-client-firstname">
-                                    First Name
-                                </label>
-                            </div>
-                            <div class="input-field col s6">
-                                <i class="fas fa-user-friends prefix"></i>
-                                <input id="add-client-lastname" name="add-client-lastname" type="text" class="validate">
-                                <label for="add-client-lastname">
-                                    Last Name
-                                </label>
-                            </div>
-                            <div class="input-field col s6">
-                                <i class="fas fa-envelope prefix"></i>
-                                <input id="add-client-email" name="add-client-email" type="email" class="validate">
-                                <label for="add-client-email">
-                                    Email
-                                </label>
-                            </div>
-                            <div class="input-field col s6">
-                                <i class="fas fa-phone prefix"></i>
-                                <input id="add-client-mobile" name="add-client-mobile" type="text" class="validate">
-                                <label for="add-client-mobile">
-                                    Mobile
-                                </label>
-                            </div>
-                            <div class="input-field col s6">
-                                <p>
-                                <label for="add-client-marketing">
-                                    <input id="add-client-marketing" name="add-client-marketing" type="checkbox" />
-                                    <span>Marketing Consent</span>
-                                </label>
-                                </p>
-                            </div>
-                        </div>
-                    </form> <!-- End add-client-form -->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button data-target="add-client-modal" class="btn modal-close" type="submit" form="add-client-form">Save</button>
-                <button data-target="add-client-modal" class="btn modal-close" type="reset" form="add-client-form">Cancel</button>
-            </div>
-        </div> <!-- End add-client-modal -->
-
         <div id="add-booking-modal" class="modal" style="display:none;"> <!-- Begin add-booking-modal -->
             <div class="modal-content">
                 <div class="row">
@@ -184,6 +133,103 @@
                 <button data-target="add-booking-modal" class="btn modal-close" type="reset" form="add-booking-form">Cancel</button>
             </div>
         </div> <!-- End add-booking-modal -->
+
+<div class="modal fade" id="action-menu" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">Action Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex flex-column">
+            <button class="btn btn-primary py-2" data-bs-target="#add-user" data-bs-toggle="modal" data-bs-dismiss="modal">
+                Add User
+            </button>
+            <button class="btn btn-warning py-2 my-2" data-bs-target="#add-guest" data-bs-toggle="modal" data-bs-dismiss="modal">
+                Add Guest
+            </button>
+            <button class="btn btn-success py-2" data-bs-target="#add-booking" data-bs-toggle="modal" data-bs-dismiss="modal">
+                Add Booking
+            </button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-guest" aria-hidden="true" aria-labelledby="addGuestLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addGuestLabel">Add Guest</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{{ url_for('add_client') }}">
+                <div class="mb-3">
+                    <label for="add-guest-firstname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="add-guest-firstname" name="add-guest-firstname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-guest-lastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="add-guest-lastname" name="add-guest-lastname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-guest-email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="add-guest-email" name="add-guest-email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-guest-mobile" class="form-label">Mobile</label>
+                    <input type="number" class="form-control" id="add-guest-mobile" name="add-guest-mobile" required>
+                </div>
+                <div class="mb-3 form-check form-switch">
+                    <label class="form-check-label" for="add-guest-marketing">Marketing Consent</label>
+                    <input class="form-check-input" type="checkbox" id="add-guest-marketing">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer d-flex">
+            <button class="btn btn-outline-primary me-auto" data-bs-target="#action-menu" data-bs-toggle="modal" data-bs-dismiss="modal">Back</button>
+            <button class="btn btn-outline-warning" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Reset</button>
+            <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Add Guest</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-booking" aria-hidden="true" aria-labelledby="addBookingLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addBookingLabel">Add Booking</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{{ url_for('add_booking') }}">
+                <div class="mb-3">
+                    <label for="add-guest-firstname" class="form-label">Client</label>
+                    <input type="text" class="form-control" id="add-guest-firstname" name="add-guest-firstname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-guest-lastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="add-guest-lastname" name="add-guest-lastname" required>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer d-flex">
+            <button class="btn btn-outline-primary me-auto" data-bs-target="#action-menu" data-bs-toggle="modal" data-bs-dismiss="modal">Back</button>
+            <button class="btn btn-outline-warning" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Reset</button>
+            <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Add Guest</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="action-fab" class="btn-group-fab" role="group" aria-label="FAB Menu">
+    <div>
+        <button type="button" class="btn btn-main btn-warning has-tooltip text-white" data-placement="left" title="Menu" data-bs-toggle="modal" href="#action-menu"> <i class="fa fa-plus"></i> </button>
+    </div>
+</div>
     {% endif %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
