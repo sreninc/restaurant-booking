@@ -283,6 +283,27 @@ def profile(email):
     return redirect(url_for("login"))
 
 
+@app.route("/users", methods=["GET", "POST"])
+def get_users():
+
+    account = mongo.db.users.find_one(
+        {"email": session["email"]})["account"]
+
+    admin = mongo.db.users.find_one(
+        {"email": session["email"]}
+    )["access"]
+    if admin == "admin":
+        admin = "true"
+    else:
+        admin = "false"
+
+    users = list(mongo.db.users.find({
+        "account": account
+    }))
+
+    return render_template("users.html", users=users, admin=admin)
+
+
 @app.route("/logout")
 def logout():
     # remove email from session cookie
