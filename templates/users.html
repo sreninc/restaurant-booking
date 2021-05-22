@@ -13,7 +13,7 @@
             </div>
             {% if admin == "true" %}
             <div class="col-auto">
-            <button class="btn btn-xs btn-primary">
+            <button class="btn btn-xs btn-primary"  data-bs-toggle="modal" data-bs-target="#addUser">
                 Add
             </button>
             </div>
@@ -39,35 +39,22 @@
                             {{ data.email }}
                         </a>
                     </div>
-                    <div class="col-auto ms-auto">
-                        <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true" aria-expanded="false">
-                            <div class="form-select form-select-xs">
-                                <select class="form-select form-select-xs form-control" data-choices="" hidden="" tabindex="-1" data-choice="active" {% if admin == "false" %}disabled{% endif %}>
-                                    <option value="Admin">
-                                        Admin
-                                    </option>
-                                </select>
-                                <div class="choices__list choices__list--single">
-                                    <div class="choices__item choices__item--selectable" data-item="" data-id="1" data-value="Admin" data-custom-properties="null" aria-selected="true">
-                                        Admin
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="choices__list dropdown-menu" aria-expanded="false">
-                                <div class="choices__list" role="listbox">
-                                    <div id="choices--mq6b-item-choice-1" class="choices__item dropdown-item active choices__item--selectable is-highlighted" role="option" data-choice="" data-id="1" data-value="Admin" data-select-text="Press to select" data-choice-selectable="" aria-selected="true">
-                                        Admin
-                                    </div>
-                                    <div id="choices--mq6b-item-choice-2" class="choices__item dropdown-item choices__item--selectable" role="option" data-choice="" data-id="2" data-value="Staff" data-select-text="Press to select" data-choice-selectable="">
-                                        Staff
-                                    </div>
-                                    <div id="choices--mq6b-item-choice-3" class="choices__item dropdown-item choices__item--selectable" role="option" data-choice="" data-id="3" data-value="Custom" data-select-text="Press to select" data-choice-selectable="">
-                                        Custom
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-auto ms-auto d-flex justify-content-end">
+                        <select class="form-select" aria-label="Access Level" {% if admin == "false" %}disabled{% endif %}>
+                            <option value="admin" {% if data.access == "admin" %}selected{% endif %}>Admin</option>
+                            <option value="user" {% if data.access != "admin" %}selected{% endif %}>User</option>
+                        </select>
                     </div>
+                    {% if admin == "true" %}
+                        <div class="col-auto d-flex justify-content-end">
+                            <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#updateUser">
+                                Edit
+                            </a>
+                            <button class="btn btn-outline-danger ms-2">
+                                Delete
+                            </button>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -75,4 +62,68 @@
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="updateUserModalLabel">Update User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="userName" name="userName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="userPassword" name="userPassword" required>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Update User</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addUserModalLabel">Update User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="">
+                <div class="mb-3">
+                    <label for="addUserName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="addUserName" name="addUserName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="addUserEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="addUserEmail" name="addUserEmail" required>
+                </div>
+                <div class="mb-3">
+                    <label for="addUserPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="addUserPassword" name="addUserPassword" required>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Update User</button>
+        </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
