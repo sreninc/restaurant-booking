@@ -6,7 +6,7 @@
         <h1>Guest Details</h1>
     </div>
     <div class="col d-flex justify-content-end">
-        <button type="reset"class="btn btn-danger align-self-end mx-2">Delete Client</button>
+        <a class="btn btn-danger align-self-end mx-2" href="{{ url_for('delete_client', client_id=guest._id) }}">Delete Client</a>
         <button type="submit" class="btn btn-primary align-self-end">Add Booking</button>
     </div>
 </div>
@@ -165,7 +165,7 @@
                 <td>{{ booking.people }}</td>
                 <td>{{ booking.status.capitalize() }}</td>
                 <td><button onclick="editBooking('{{ booking.client_id }}', '{{ booking._id }}', '{{ booking.date }}', this.parentElement.parentElement.rowIndex)" class="btn btn-outline-primary">Edit</button></td>
-                <td><button class="btn btn-outline-danger">Delete</td>
+                <td><a class="btn btn-outline-danger" href="{{ url_for('delete_booking', booking_id=booking._id, client_id=guest._id, booking_value=booking.value, booking_status=booking.status ) }}">Delete</a></td>
             </tr>
         {% endfor %}
     </tbody>
