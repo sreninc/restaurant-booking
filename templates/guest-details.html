@@ -14,7 +14,7 @@
 
 <div class="row d-flex justify-content-center justify-content-lg-between">
 
-<form class="row gx-3 align-items-center border border-black col-12 col-lg-8 mb-4 py-2 d-flex justify-content-center" style="max-width: 750px;">
+<form class="row gx-3 align-items-center border border-black col-12 col-lg-8 mb-4 py-2 d-flex justify-content-center" style="max-width: 750px;" method="POST" action="{{ url_for('edit_guest', guest_id=guest._id) }}">
     <div class="col-auto">
         <label for="firstName" class="form-label">
             First Name
@@ -37,7 +37,7 @@
         <label for="mobile" class="form-label">
             Mobile
         </label>
-        <input type="number" id="mobile" name="mobile" class="form-control" value="{{ guest.mobile or '' }}" required />
+        <input type="tel" id="mobile" name="mobile" class="form-control" value="{{ guest.mobile or '' }}" required />
     </div>
     <div class="col-auto">
         <label for="dob" class="form-label">
@@ -49,25 +49,30 @@
         <label for="clientSince" class="form-label">
             Client Since
         </label>
-        <input type="date" id="clientSince" name="clientSince" class="form-control" value="{{ guest.created_date.strftime('%Y-%m-%d') or '' }}" />
+        <input type="date" id="clientSince" name="clientSince" class="form-control" value="{{ guest.created_date.strftime('%Y-%m-%d') or '' }}" disabled    />
+    </div>
+    <div class="col-auto col-lg-6">
+        <label for="notes" class="form-label">
+            Guest Notes
+        </label>
+        <textarea id="notes" name="notes" class="form-control" value="{{ guest.notes or '' }}">
+            {{- guest.notes or '' -}}
+        </textarea>
     </div>
     <div class="col-auto">
         <label for="marketingConsent" class="form-check-label">
             Marketing Consent
         </label>
-        <input type="checkbox" id="marketingConsent" name="marketingConsent" class="form-check-input" value="{{ guest.marketing_consent or '' }}" />
+        <input type="checkbox" id="marketingConsent" name="marketingConsent" class="form-check-input" {{ 'checked' if guest.marketing_consent == "on" or '' }} />
     </div>
-    <div class="col-auto">
-        <label for="notes" class="form-label">
-            Guest Notes
-        </label>
-        <textarea id="notes" name="notes" class="form-control" value="{{ guest.notes or '' }}"></textarea>
+    <div class="col-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary align-self-end">Update Guest</button>
     </div>
 </form>
 
 <div class="mb-4" style="width: 18rem;">
-    <div class="card-header">
-        Client Stats
+    <div class="card-header bg-white border border-black border-1 fs-5 text-center">
+        Client Statistics
     </div>
     <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-start">

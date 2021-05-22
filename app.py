@@ -193,27 +193,30 @@ def add_client():
     return render_template("clients.html")
 
 
-@app.route("/edit_client", methods=["GET", "POST"])
-def edit_client():
+@app.route("/edit_guest/<guest_id>", methods=["GET", "POST"])
+def edit_guest(guest_id):
     if request.method == "POST":
-        marketing_consent = "on" if request.form.get("edit-client-marketing") else "off"
+        marketing_consent = "on" if request.form.get("marketingConsent") else "off"
+        dob = datetime.strptime(request.form.get("dob"), '%Y-%m-%d')
         mongo.db.clients.update(
-                {"_id": ObjectId(request.form.get("editClient"))},
+                {"_id": ObjectId(guest_id)},
                 {"$set": {
-                    "first_name": request.form.get("edit-client-firstname").capitalize(),
-                    "last_name": request.form.get("edit-client-lastname"),
-                    "email": request.form.get("edit-client-email").lower(),
-                    "mobile": request.form.get("edit-client-mobile"),
+                    "first_name": request.form.get("firstName").capitalize(),
+                    "last_name": request.form.get("lastName"),
+                    "email": request.form.get("email").lower(),
+                    "mobile": request.form.get("mobile"),
+                    "dob": dob,
                     "marketing_consent": marketing_consent,
+                    "notes": request.form.get("notes"),
                     "updated_by": session["email"],
                     "updated_date": datetime.today()
                     }
                 }
             )
-        flash("Client Successfully Edited")
-        return redirect(url_for("get_clients"))
+        flash("Update Successful")
+        return redirect(url_for('guest_details', client_id=guest_id))
 
-    return render_template("clients.html")
+    return render_template("guest-details.html")
 
 
 @app.route("/delete_client/<client_id>")
