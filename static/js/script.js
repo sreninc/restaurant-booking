@@ -1,29 +1,3 @@
-document.addEventListener(
-    'DOMContentLoaded', 
-    function() {
-        var elems = document.querySelectorAll('.sidenav');
-        var instances = M.Sidenav.init(elems, {accordion: true, edge: 'right'});
-        var textCounter = document.querySelectorAll('#message');
-        M.CharacterCounter.init(textCounter);
-    }
-);
-
-// Initiate modal functionality
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-var elems = document.querySelectorAll('select');
-var instances = M.FormSelect.init(elems, { dropdownOptions: {container: document.body, constrainWidth: true }} );
-});
-
 function editBooking(client_id, booking_id, booking_date, parent) {
     const row = document.getElementById("bookings-table").rows[parent].cells;
 
@@ -81,11 +55,6 @@ function editClient(clientId) {
 
     M.updateTextFields();
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.fixed-action-btn');
-    var instances = M.FloatingActionButton.init(elems);
-});
 
 function generateFlashMessage(message) {
     Swal.fire(message);
