@@ -1,34 +1,17 @@
-function editBooking(client_id, booking_id, booking_date, parent) {
-    const row = document.getElementById("bookings-table").rows[parent].cells;
+function editBooking(booking_id, date) {
+    var row = document.getElementById(booking_id).cells;
+    document.getElementById("name").value = row[2].innerHTML.split(">")[1].split("<")[0];
+    document.getElementById("date").value = date;
+    document.getElementById("time").value = row[1].innerHTML;
+    document.getElementById("people").value = row[3].innerHTML;
 
-    document.getElementById("edit-booking-date").value = booking_date;
-    document.getElementById("edit-booking-time").value = row[1].innerHTML;
-    document.getElementById("edit-booking-people").value = row[3].innerHTML;
-    document.getElementById("edit-booking-value").value = row[5].innerHTML.split("€")[1];
-
-    var selectStatus = document.getElementById("edit-booking-status").options;
-    for (i = 0; i < selectStatus.length; i++) {
-        if (selectStatus[i].value == row[4].innerHTML.toLowerCase()) {
-            selectStatus[i].selected = true;
+    const status = row[4].innerHTML;
+    const statusSelect = document.getElementById("edit-booking-status").options;
+    for (option in statusSelect) {
+        if (statusSelect[option].innerHTML === status) {
+            statusSelect[option].selected = true;
         }
     }
-
-    document.getElementById("edit-booking-id").value = booking_id;
-    var select = document.getElementById("edit-booking-client-id").options;
-    for (i = 0; i < select.length; i++) {
-        if (select[i].value == client_id) {
-            select[i].selected = true;
-        }
-    }
-    var elem = document.querySelectorAll('.modal')[0];
-    var instance = M.Modal.getInstance(elem);
-    instance.open();
-
-    var selectElems = document.querySelectorAll('select');
-    selectElems[0].setAttribute("disabled", true);
-    var selectInstances = M.FormSelect.init(selectElems, { dropdownOptions: {container: document.body, constrainWidth: true }} );
-    
-    M.updateTextFields();
 }
 
 function editClient(clientId) {
