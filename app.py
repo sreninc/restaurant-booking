@@ -149,7 +149,7 @@ def delete_booking(booking_id, client_id, booking_value, booking_status):
             )
     mongo.db.bookings.remove({"_id": ObjectId(booking_id)})
     flash("Booking Successfully Deleted")
-    return redirect(url_for("get_bookings"))
+    return guest_details(client_id)
 
 
 @app.route("/clients", methods=["GET", "POST"])
