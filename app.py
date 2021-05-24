@@ -197,7 +197,7 @@ def add_client():
 def edit_guest(guest_id):
     if request.method == "POST":
         marketing_consent = "on" if request.form.get("marketingConsent") else "off"
-        dob = datetime.strptime(request.form.get("dob"), '%Y-%m-%d')
+        dob = datetime.strptime(request.form.get("dob"), '%Y-%m-%d') if request.form.get("dob") else ""
         mongo.db.clients.update(
                 {"_id": ObjectId(guest_id)},
                 {"$set": {
