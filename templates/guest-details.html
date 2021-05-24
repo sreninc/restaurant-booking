@@ -151,21 +151,22 @@
         <tr>
             <th scope="col">Date</th>
             <th scope="col">Time</th>
+            <th scope="col" class="visually-hidden">Guest</th>
             <th scope="col">People</th>
             <th scope="col">Status</th>
             <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
         {% for booking in bookings %}
-            <tr>
-                <td>{{ booking.date }}</td>
+            <tr id="{{ booking._id }}">
+                <td>{{ booking.new_date }}</td>
                 <td>{{ booking.time }}</td>
+                <td class="visually-hidden"><a href="{{ url_for('guest_details', client_id=booking.client_id) }}">{{ booking.new_client_id }}</a></td>
                 <td>{{ booking.people }}</td>
                 <td>{{ booking.status.capitalize() }}</td>
-                <td><button onclick="editBooking('{{ booking.client_id }}', '{{ booking._id }}', '{{ booking.date }}', this.parentElement.parentElement.rowIndex)" class="btn btn-outline-primary">Edit</button></td>
-                <td><a class="btn btn-outline-danger" href="{{ url_for('delete_booking', booking_id=booking._id, client_id=guest._id, booking_value=booking.value, booking_status=booking.status ) }}">Delete</a></td>
+                <td><button onclick="editBooking('{{ booking._id }}', '{{ booking.date }}', '{{ booking.client_id }}')" data-bs-toggle="modal" data-bs-target="#editBooking" class="btn btn-outline-primary">Edit</button></td>
+                <td class="visually-hidden">{{ booking.value }}</td>
             </tr>
         {% endfor %}
     </tbody>
@@ -173,4 +174,58 @@
 {% else %}
     <h3 class="red-text text-darken-4 center-align">No Bookings Found</h3>
 {% endif %}
+
+<!-- Edit Booking Modal -->
+<div class="modal fade" id="editBooking" tabindex="-1" aria-labelledby="editBookingLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="editBookingLabel">Edit Booking</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{{ url_for('edit_booking') }}" id="editBookingForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Guest</label>
+                    <input type="text" class="form-control" id="name" name="name" disabled>
+                    <input type="hidden" class="form-control" id="guestId" name="guestId">
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                    <input type="hidden" class="form-control" id="bookingId" name="bookingId">
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time</label>
+                    <input type="time" class="form-control" id="time" name="time" required>
+                </div>
+                <div class="mb-3">
+                    <label for="people" class="form-label">People</label>
+                    <input type="number" class="form-control" id="people" name="people" required>
+                </div>
+                <div class="mb-3">
+                    <label for="value" class="form-label">Value</label>
+                    <input type="number" class="form-control" id="value" name="value" required>
+                </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select" aria-label="Booking Status" id="edit-booking-status" name="edit-booking-status">
+                        <option value="booked">Booked</option>
+                        <option value="waitlist">Waitlist</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="no-show">No Show</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" form="editBookingForm">Update Booking</button>
+        </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
