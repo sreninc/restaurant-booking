@@ -25,7 +25,7 @@
             {% if session.email %}
                 <li class="nav-item"><a href="{{ url_for('get_bookings') }}" class="nav-link">Bookings</a></li>
                 <li class="nav-item"><a href="{{ url_for('get_clients') }}" class="nav-link">Clients</a></li>
-                <li class="nav-item"><a href="{{ url_for('profile', email=session['email']) }}" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="{{ url_for('get_users') }}" class="nav-link">Users</a></li>
                 <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
             {% else %}
                 <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>

@@ -246,8 +246,7 @@ def login():
                     email = list(mongo.db.users.find({"email": session["email"]}))
                     flash("Welcome, {}".format(
                         request.form.get("email")))
-                    return redirect(url_for(
-                        "profile", email=email))
+                    return get_users()
             else:
                 # invalid password match
                 flash("Incorrect Email and/or Password")
@@ -334,7 +333,7 @@ def signup():
         # put the new user into 'session' cookie
         session["email"] = request.form.get("email").lower()
         flash("Registration Successful!")
-        return redirect(url_for("profile"))
+        return get_users()
     return render_template("signup.html")
 
 
