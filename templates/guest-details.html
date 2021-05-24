@@ -7,7 +7,7 @@
     </div>
     <div class="col d-flex justify-content-end">
         <a class="btn btn-danger align-self-end mx-2" href="{{ url_for('delete_client', client_id=guest._id) }}">Delete Client</a>
-        <button type="submit" class="btn btn-primary align-self-end">Add Booking</button>
+        <button type="button" class="btn btn-primary align-self-end" onclick='addBooking("{{ guest.first_name }}", "{{ guest.last_name }}", "{{ guest._id }}")' data-bs-toggle="modal" data-bs-target="#addBooking">Add Booking</button>
     </div>
 </div>
 
@@ -223,6 +223,58 @@
         <div class="modal-footer">
             <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" form="editBookingForm">Update Booking</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Booking Modal -->
+<div class="modal fade" id="addBooking" tabindex="-1" aria-labelledby="addBookingLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addBookingLabel">Edit Booking</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{{ url_for('add_booking') }}" id="addBookingForm">
+                <div class="mb-3">
+                    <label for="nadd-ame" class="form-label">Guest</label>
+                    <input type="text" class="form-control" id="add-name" name="name" disabled>
+                    <input type="hidden" class="form-control" id="add-guestId" name="add-guestId">
+                </div>
+                <div class="mb-3">
+                    <label for="add-date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="add-date" name="add-date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-time" class="form-label">Time</label>
+                    <input type="time" class="form-control" id="add-time" name="add-time" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-people" class="form-label">People</label>
+                    <input type="number" class="form-control" id="add-people" name="add-people" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-value" class="form-label">Value</label>
+                    <input type="number" class="form-control" id="add-value" name="add-value" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-booking-status" class="form-label">Status</label>
+                    <select class="form-select" aria-label="Booking Status" id="add-booking-status" name="add-booking-status">
+                        <option value="booked">Booked</option>
+                        <option value="waitlist">Waitlist</option>
+                        <option value="confirmed" selected>Confirmed</option>
+                        <option value="no-show">No Show</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" form="addBookingForm">Update Booking</button>
         </div>
         </div>
     </div>

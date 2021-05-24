@@ -17,6 +17,12 @@ function editBooking(booking_id, date, guestId) {
     }
 }
 
+function addBooking(guestFirst, guestLast, guestId) {
+    guest = guestFirst + " " + guestLast;
+    document.getElementById("add-name").value = guest;
+    document.getElementById("add-guestId").value = guestId;
+}
+
 function editClient(clientId) {
     document.getElementById("editClient").value = clientId;
     var elem = document.querySelectorAll('.modal')[0];

@@ -49,32 +49,31 @@ def add_booking():
             bookings_completed = 0
         # find the client
         client = mongo.db.clients.find_one(
-            {"_id": ObjectId(request.form.get("add-booking-client-id"))}
+            {"_id": ObjectId(request.form.get("add-guestId"))}
         )
         # update the client
         mongo.db.clients.update(
-            {"_id": ObjectId(request.form.get("add-booking-client-id"))},
+            {"_id": ObjectId(request.form.get("add-guestId"))},
             {"$set": {
                 "bookings": client["bookings"] + 1,
                 "bookings_completed": client["bookings_completed"] + int(bookings_completed),
-                "value": client["value"] + int(request.form.get("add-booking-value"))
+                "value": client["value"] + int(request.form.get("add-value"))
                 }
             }
         )
         booking = {
-            "client_id": request.form.get("add-booking-client-id"),
-            "date": request.form.get("add-booking-date"),
-            "time": request.form.get("add-booking-time"),
-            "people": request.form.get("add-booking-people"),
+            "client_id": request.form.get("add-guestId"),
+            "date": request.form.get("add-date"),
+            "time": request.form.get("add-time"),
+            "people": request.form.get("add-people"),
             "status": request.form.get("add-booking-status"),
-            "value": request.form.get("add-booking-value"),
+            "value": request.form.get("add-value"),
             "created_by": session["email"],
             "created_date": datetime.today()
         }
         mongo.db.bookings.insert_one(booking)
         flash("Booking Successfully Added")
-        flash("Client Booking Stats Updated")
-        return redirect(url_for("get_bookings"))
+        return guest_details(request.form.get("add-guestId"))
 
     return render_template("bookings.html")
 
