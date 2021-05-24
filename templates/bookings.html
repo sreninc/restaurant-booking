@@ -48,7 +48,8 @@
                 <td><a href="{{ url_for('guest_details', client_id=booking.client_id) }}">{{ booking.new_client_id }}</a></td>
                 <td>{{ booking.people }}</td>
                 <td>{{ booking.status.capitalize() }}</td>
-                <td><button onclick="editBooking('{{ booking._id }}', '{{ booking.date }}')" data-bs-toggle="modal" data-bs-target="#editBooking" class="btn btn-outline-primary">Edit</button></td>
+                <td><button onclick="editBooking('{{ booking._id }}', '{{ booking.date }}', '{{ booking.client_id }}')" data-bs-toggle="modal" data-bs-target="#editBooking" class="btn btn-outline-primary">Edit</button></td>
+                <td class="visually-hidden">{{ booking.value }}</td>
             </tr>
         {% endfor %}
     </tbody>
@@ -66,14 +67,16 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="">
+            <form method="POST" action="{{ url_for('edit_booking') }}" id="editBookingForm">
                 <div class="mb-3">
                     <label for="name" class="form-label">Guest</label>
                     <input type="text" class="form-control" id="name" name="name" disabled>
+                    <input type="hidden" class="form-control" id="guestId" name="guestId">
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
                     <input type="date" class="form-control" id="date" name="date" required>
+                    <input type="hidden" class="form-control" id="bookingId" name="bookingId">
                 </div>
                 <div class="mb-3">
                     <label for="time" class="form-label">Time</label>
@@ -82,6 +85,10 @@
                 <div class="mb-3">
                     <label for="people" class="form-label">People</label>
                     <input type="number" class="form-control" id="people" name="people" required>
+                </div>
+                <div class="mb-3">
+                    <label for="value" class="form-label">Value</label>
+                    <input type="number" class="form-control" id="value" name="value" required>
                 </div>
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
@@ -97,8 +104,8 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update User</button>
+            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" form="editBookingForm">Update Booking</button>
         </div>
         </div>
     </div>

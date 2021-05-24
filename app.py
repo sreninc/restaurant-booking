@@ -84,13 +84,13 @@ def edit_booking():
     if request.method == "POST":
         # find the client
         client = mongo.db.clients.find_one(
-            {"_id": ObjectId(request.form.get("edit-booking-client-id"))}
+            {"_id": ObjectId(request.form.get("guestId"))}
         )
         booking = mongo.db.bookings.find_one(
-            {"_id": ObjectId(request.form.get("edit-booking-id"))}
+            {"_id": ObjectId(request.form.get("bookingId"))}
         )
 
-        value = request.form.get("edit-booking-value")
+        value = request.form.get("value")
         bookings_completed = 0
         old_value = 0
         if request.form.get("edit-booking-status") == "completed" and booking["status"] != "completed":
@@ -102,13 +102,9 @@ def edit_booking():
         elif request.form.get("edit-booking-status") == "completed" and booking["status"] == "completed":
             old_value = booking["value"]
 
-        print(booking["value"])
-        print(old_value)
-        print(value)
-
         # update the client
         mongo.db.clients.update(
-                {"_id": ObjectId(request.form.get("edit-booking-client-id"))},
+                {"_id": ObjectId(request.form.get("guestId"))},
                 {"$set": {
                     "value": client["value"] + int(value) - int(old_value),
                     "bookings_completed": client["bookings_completed"] + int(bookings_completed)
@@ -118,13 +114,13 @@ def edit_booking():
 
         # update the booking
         mongo.db.bookings.update(
-                {"_id": ObjectId(request.form.get("edit-booking-id"))},
+                {"_id": ObjectId(request.form.get("bookingId"))},
                 {"$set": {
-                    "date": request.form.get("edit-booking-date"),
-                    "time": request.form.get("edit-booking-time"),
-                    "people": request.form.get("edit-booking-people"),
+                    "date": request.form.get("date"),
+                    "time": request.form.get("time"),
+                    "people": request.form.get("people"),
                     "status": request.form.get("edit-booking-status"),
-                    "value": request.form.get("edit-booking-value"),
+                    "value": request.form.get("value"),
                     "updated_by": session["email"],
                     "updated_date": datetime.today()
                     }

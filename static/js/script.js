@@ -1,9 +1,12 @@
-function editBooking(booking_id, date) {
+function editBooking(booking_id, date, guestId) {
     var row = document.getElementById(booking_id).cells;
     document.getElementById("name").value = row[2].innerHTML.split(">")[1].split("<")[0];
+    document.getElementById("guestId").value = guestId;
+    document.getElementById("bookingId").value = booking_id;
     document.getElementById("date").value = date;
     document.getElementById("time").value = row[1].innerHTML;
     document.getElementById("people").value = row[3].innerHTML;
+    document.getElementById("value").value = row[6].innerHTML;
 
     const status = row[4].innerHTML;
     const statusSelect = document.getElementById("edit-booking-status").options;
