@@ -6,7 +6,7 @@
         <h1>Guest Details</h1>
     </div>
     <div class="col d-flex justify-content-end">
-        <a class="btn btn-danger align-self-end mx-2" href="{{ url_for('delete_client', client_id=guest._id) }}">Delete Client</a>
+        <button class="btn btn-danger align-self-end mx-2" onclick="confirmDeleteGuest('{{ guest._id }}')">Delete Client</button>
         <button type="button" class="btn btn-primary align-self-end" onclick='addBooking("{{ guest.first_name }}", "{{ guest.last_name }}", "{{ guest._id }}")' data-bs-toggle="modal" data-bs-target="#addBooking">Add Booking</button>
     </div>
 </div>
