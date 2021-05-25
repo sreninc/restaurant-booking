@@ -371,6 +371,13 @@ def edit_user():
     return render_template("users.html")
 
 
+@app.route("/delete_user/<user_id>")
+def delete_user(user_id):
+    mongo.db.users.remove({"_id": ObjectId(user_id)})
+    flash("User Successfully Deleted")
+    return redirect(url_for("get_users"))
+
+
 @app.route("/logout")
 def logout():
     # remove email from session cookie
