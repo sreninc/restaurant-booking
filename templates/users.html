@@ -100,28 +100,35 @@
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="addUserModalLabel">Update User</h5>
+            <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="">
+            <form method="POST" action="{{ url_for('add_user') }}" id="addUserForm">
                 <div class="mb-3">
-                    <label for="addUserName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="addUserName" name="addUserName" required>
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="addUserEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="addUserEmail" name="addUserEmail" required>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="addUserPassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="addUserPassword" name="addUserPassword" required>
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="access" class="form-label">Status</label>
+                    <select class="form-select" aria-label="Access" name="access">
+                        <option value="User" selected>User</option>
+                        <option value="Admin">Admin</option>
+                    </select>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update User</button>
+            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" form="addUserForm">Add User</button>
         </div>
         </div>
     </div>

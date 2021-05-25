@@ -277,10 +277,8 @@ def guest_details(client_id):
 
 @app.route("/users", methods=["GET", "POST"])
 def get_users():
-
     account = mongo.db.users.find_one(
         {"email": session["email"]})["account"]
-
     admin = mongo.db.users.find_one(
         {"email": session["email"]}
     )["access"]
@@ -294,6 +292,35 @@ def get_users():
     }))
 
     return render_template("users.html", users=users, admin=admin)
+
+
+@app.route("/add_user", methods=["GET", "POST"])
+def add_user():
+    if request.method == "POST":
+
+        # check if username already exists in db
+        existing_user = mongo.db.users.find_one(
+            {"email": request.form.get("email").lower()})
+
+        if existing_user:
+            flash("Username already exists")
+            return redirect(url_for("get_users"))
+
+        user = {
+            "name": request.form.get("name"),
+            "email": request.form.get("email").lower(),
+            "password": generate_password_hash(request.form.get("password")),
+            "access": request.form.get("access"),
+            "account": "1",
+            # This needs to be changed
+            "created_by": session["email"],
+            "created_date": datetime.today()
+        }
+        mongo.db.users.insert_one(user)
+        flash("User Successfully Added")
+        return redirect(url_for("get_users"))
+
+    return render_template("users.html")
 
 
 @app.route("/logout")
