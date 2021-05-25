@@ -48,6 +48,20 @@ function editClient(clientId) {
     M.updateTextFields();
 }
 
+function editUser(userId, access, email, name) {
+    document.getElementById("access").value = access;
+    document.getElementById("userId").value = userId;
+    document.getElementById("email").value = email;
+    document.getElementById("name").value = name;
+
+    const accessSelect = document.getElementById("access").options;
+    for (option in accessSelect) {
+        if (accessSelect[option].value === access) {
+            accessSelect[option].selected = true;
+        }
+    }
+}
+
 function generateFlashMessage(message) {
     Swal.fire(message);
 }

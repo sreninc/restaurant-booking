@@ -303,7 +303,7 @@ def add_user():
             {"email": request.form.get("email").lower()})
 
         if existing_user:
-            flash("Username already exists")
+            flash("Email already exists")
             return redirect(url_for("get_users"))
 
         user = {
@@ -318,6 +318,54 @@ def add_user():
         }
         mongo.db.users.insert_one(user)
         flash("User Successfully Added")
+        return redirect(url_for("get_users"))
+
+    return render_template("users.html")
+
+
+@app.route("/edit_user", methods=["GET", "POST"])
+def edit_user():
+    if request.method == "POST":
+
+        # check if username already exists in db
+        # existing_user = mongo.db.users.find_one(
+        #     {"email": request.form.get("email").lower()})
+
+        # if existing_user:
+        #     flash("Email already exists")
+        #     return redirect(url_for("get_users"))
+        # Need to check this to not include current user
+
+        mongo.db.users.update(
+            {
+                "_id": ObjectId(request.form.get("userId"))
+            },
+            {
+                "$set":
+                {
+                    "name": request.form.get("name"),
+                    "email": request.form.get("email").lower(),
+                    "access": request.form.get("access"),
+                    "updated_by": session["email"],
+                    "updated_date": datetime.today()
+                }
+            }
+        )
+
+        if request.form.get("password"):
+            mongo.db.users.update(
+                {
+                    "_id": ObjectId(request.form.get("userId"))
+                },
+                {
+                    "$set":
+                    {
+                        "password": generate_password_hash(request.form.get("password"))
+                    }
+                }
+            )
+
+        flash("User Successfully Updated")
         return redirect(url_for("get_users"))
 
     return render_template("users.html")
