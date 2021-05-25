@@ -168,13 +168,16 @@ def search_clients():
 @app.route("/add_client", methods=["GET", "POST"])
 def add_client():
     if request.method == "POST":
-        marketing_consent = "on" if request.form.get("add-client-marketing") else "off"
+        marketing_consent = "on" if request.form.get("marketingConsent") else "off"
+        dob = datetime.strptime(request.form.get("dob"), '%Y-%m-%d') if request.form.get("dob") else ""
         client = {
-            "first_name": request.form.get("add-client-firstname").capitalize(),
-            "last_name": request.form.get("add-client-lastname"),
-            "email": request.form.get("add-client-email").lower(),
-            "mobile": request.form.get("add-client-mobile"),
+            "first_name": request.form.get("firstName").capitalize(),
+            "last_name": request.form.get("lastName"),
+            "email": request.form.get("email").lower(),
+            "mobile": request.form.get("mobile"),
             "marketing_consent": marketing_consent,
+            "notes": request.form.get("notes"),
+            "dob": dob,
             "bookings": 0,
             "bookings_completed": 0,
             "value": 0,

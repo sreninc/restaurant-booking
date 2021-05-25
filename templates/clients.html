@@ -13,7 +13,7 @@
             </h4>
             </div>
             <div class="col-auto">
-            <button class="btn btn-xs btn-primary">
+            <button class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#addGuest">
                 Add
             </button>
             </div>
@@ -62,4 +62,55 @@
         <h3 class="red-text text-darken-4 center-align">No Clients Found</h3>
     {% endif %}
 
+<!-- Add Booking Modal -->
+<div class="modal fade" id="addGuest" tabindex="-1" aria-labelledby="addGuestLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addGuestLabel">Add Guest</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{{ url_for('add_client') }}" id="addGuestForm">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mobile" class="form-label">Mobile</label>
+                    <input type="tel" class="form-control" id="mobile" name="mobile" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="dob" name="dob">
+                </div>
+                <div class="mb-3">
+                    <label for="notes" class="form-label">
+                        Guest Notes
+                    </label>
+                    <textarea id="notes" name="notes" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="marketingConsent" class="form-check-label">
+                        Marketing Consent
+                    </label>
+                    <input type="checkbox" id="marketingConsent" name="marketingConsent" class="form-check-input" />
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" form="addGuestForm">Update Booking</button>
+        </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
