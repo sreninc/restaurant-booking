@@ -4,25 +4,27 @@
 <h1>Bookings</h1>
 
 <div class="row">
-    <div class="col">
-        <label for="booking-date">Date:</label>
-        <input type="date" id="booking-date" name="booking-date" class="form-control" aria-label="Date">
-    </div>
-    <div class="col">
-        <label for="booking-status">Status</label>
-        <select id="booking-status" name="booking-status" class="form-select">
-            <option value="">Select Status</option>
-            <option value="booked">Booked</option>
-            <option value="waitlist">Waitlist</option>
-            <option value="confirmed">Confirmed</option>
-            <option value="no-show">No Show</option>
-            <option value="cancelled">Cancelled</option>
-            <option value="completed">Completed</option>
-        </select>
-    </div>
+    <form method="POST" action="{{ url_for('filter_bookings' )}}" id="filterBookings">
+        <div class="col">
+            <label for="booking-date">Date:</label>
+            <input type="date" id="bookingDate" name="bookingDate" class="form-control" aria-label="Date">
+        </div>
+        <div class="col">
+            <label for="bookingStatus">Status</label>
+            <select id="bookingStatus" name="booking-status" class="form-select">
+                <option value="">Select Status</option>
+                <option value="booked">Booked</option>
+                <option value="waitlist">Waitlist</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="no-show">No Show</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+    </form>
     <div class="col d-flex justify-content-end">
-        <button type="reset"class="btn btn-danger align-self-end mx-2">Reset</button>
-        <button type="submit" class="btn btn-primary align-self-end">Search</button>
+        <button type="reset"class="btn btn-danger align-self-end mx-2" form="filterBookings">Reset</button>
+        <button type="submit" class="btn btn-primary align-self-end" form="filterBookings">Search</button>
     </div>
 </div>
 

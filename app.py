@@ -40,6 +40,39 @@ def get_bookings():
     return render_template("bookings.html", bookings=bookings, clients=clients)
 
 
+@app.route("/filter_booking", methods=["GET", "POST"])
+def filter_bookings():
+    clients = list(mongo.db.clients.find(
+        {},
+        {"first_name": 1, "last_name": 1}))
+    if request.form.get("bookingDate") and request.form.get("bookingStatus"):
+        bookings = list(mongo.db.bookings.find(
+            {
+                "date": request.form.get("bookingDate"),
+                "status": request.form.get("bookingStatus")
+            }
+        ))
+    elif request.form.get("bookingDate"):
+        bookings = list(mongo.db.bookings.find(
+            {
+                "date": request.form.get("bookingDate")
+            }
+        ))
+    elif request.form.get("bookingStatus"):
+        bookings = list(mongo.db.bookings.find(
+            {
+                "status": request.form.get("bookingStatus")
+            }
+        ))
+    for x in range(len(bookings)):
+        new_date = datetime.strptime(bookings[x]["date"], '%Y-%m-%d')
+        bookings[x]["new_date"] = new_date.strftime("%a %d %b")
+        for y in range(len(clients)):
+            if str(clients[y]["_id"]) == str(bookings[x]["client_id"]):
+                bookings[x]["new_client_id"] = clients[y]["first_name"] + " " + clients[y]["last_name"]
+    return render_template("bookings.html", bookings=bookings, clients=clients)
+
+
 @app.route("/add_booking", methods=["GET", "POST"])
 def add_booking():
     if request.method == "POST":
