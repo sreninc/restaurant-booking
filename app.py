@@ -45,7 +45,9 @@ def filter_bookings():
     clients = list(mongo.db.clients.find(
         {},
         {"first_name": 1, "last_name": 1}))
-    if request.form.get("bookingDate") and request.form.get("bookingStatus"):
+    if not request.form.get("bookingDate") and not request.form.get("bookingStatus"):
+        return get_bookings()
+    elif request.form.get("bookingDate") and request.form.get("bookingStatus"):
         bookings = list(mongo.db.bookings.find(
             {
                 "date": request.form.get("bookingDate"),
@@ -191,10 +193,13 @@ def get_clients():
     return render_template("clients.html", clients=clients)
 
 
-@app.route("/search_clients", methods=["GET", "POST"])
-def search_clients():
+@app.route("/search", methods=["GET", "POST"])
+def search():
     query = request.form.get("query")
     clients = list(mongo.db.clients.find({"$text": {"$search": query}}))
+    if len(clients) == 1:
+        return guest_details(clients[0]["_id"])
+
     return render_template("clients.html", clients=clients)
 
 
