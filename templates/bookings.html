@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block content %}
 
 <h1>Bookings</h1>
@@ -39,6 +40,7 @@
             <th scope="col">Guest</th>
             <th scope="col">People</th>
             <th scope="col">Status</th>
+            <th scope="col">Booking Rating</th>
             <th scope="col">Edit</th>
         </tr>
     </thead>
@@ -50,6 +52,13 @@
                 <td><a href="{{ url_for('guest_details', client_id=booking.client_id) }}">{{ booking.new_client_id }}</a></td>
                 <td>{{ booking.people }}</td>
                 <td>{{ booking.status.capitalize() }}</td>
+                <td>
+                    <i class="{% if booking.rating and booking.rating >= 1 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                    <i class="{% if booking.rating and booking.rating >= 2 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                    <i class="{% if booking.rating and booking.rating >= 3 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                    <i class="{% if booking.rating and booking.rating >= 4 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                    <i class="{% if booking.rating and booking.rating >= 5 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                </td>
                 <td><button onclick="editBooking('{{ booking._id }}', '{{ booking.date }}', '{{ booking.client_id }}')" data-bs-toggle="modal" data-bs-target="#editBooking" class="btn btn-outline-primary">Edit</button></td>
                 <td class="visually-hidden">{{ booking.value }}</td>
             </tr>

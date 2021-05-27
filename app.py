@@ -34,6 +34,8 @@ def get_bookings():
     for x in range(len(bookings)):
         new_date = datetime.strptime(bookings[x]["date"], '%Y-%m-%d')
         bookings[x]["new_date"] = new_date.strftime("%a %d %b")
+        bookings[x]["rating"] = int(bookings[x]["rating"])
+        print(bookings[x]["rating"])
         for y in range(len(clients)):
             if str(clients[y]["_id"]) == str(bookings[x]["client_id"]):
                 bookings[x]["new_client_id"] = clients[y]["first_name"] + " " + clients[y]["last_name"]
