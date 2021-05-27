@@ -192,6 +192,8 @@ def delete_booking(booking_id, client_id, booking_value, booking_status):
 @app.route("/clients", methods=["GET", "POST"])
 def get_clients():
     clients = list(mongo.db.clients.find())
+    for x in range(len(clients)):
+        clients[x]["rating"] = int(clients[x]["rating"])
     return render_template("clients.html", clients=clients)
 
 

@@ -34,12 +34,12 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="col-sm-4 ms-n5">
+                    <div class="col-sm-3 ms-n5">
                         <p class="mb-0 text-truncate">
                             {{ client.first_name }} {{ client.last_name }}
                         </p>
                     </div>
-                    <div class="col-sm-3 ms-n5">
+                    <div class="col-sm-2 ms-n5">
                         <p class="mb-0 text-truncate">
                             {{ client.mobile }}
                         </p>
@@ -48,6 +48,13 @@
                         <p class="mb-0 text-truncate">
                             {{ client.email }}
                         </p>
+                    </div>
+                    <div class="col-sm-2 ms-n5">
+                        <i class="{% if client.rating and client.rating >= 1 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                        <i class="{% if client.rating and client.rating >= 2 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                        <i class="{% if client.rating and client.rating >= 3 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                        <i class="{% if client.rating and client.rating >= 4 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                        <i class="{% if client.rating and client.rating >= 5 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
                     </div>
                     <div class="col-sm-1 ms-n5">
                         <a class="btn btn-sm btn-outline-success" href="{{ url_for('guest_details', client_id=client._id) }}">Edit</a>
