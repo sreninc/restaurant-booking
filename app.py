@@ -302,6 +302,7 @@ def login():
 def guest_details(client_id):
     guest = mongo.db.clients.find_one(
             {"_id": ObjectId(client_id)})
+    guest["rating"] = int(guest["rating"])
     bookings = list(mongo.db.bookings.find(
         {"client_id": client_id}))
 

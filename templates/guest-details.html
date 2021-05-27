@@ -3,7 +3,16 @@
 
 <div class="row mb-4">
     <div class="col">
-        <h1>Guest Details</h1>
+        <h1>
+            {{ guest.first_name }}
+            {{ guest.last_name }}
+            -
+            <i class="{% if guest.rating and guest.rating >= 1 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+            <i class="{% if guest.rating and guest.rating >= 2 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+            <i class="{% if guest.rating and guest.rating >= 3 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+            <i class="{% if guest.rating and guest.rating >= 4 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+            <i class="{% if guest.rating and guest.rating >= 5 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+        </h1>
     </div>
     <div class="col d-flex justify-content-end">
         <button class="btn btn-danger align-self-end mx-2" onclick="confirmDeleteGuest('{{ guest._id }}')">Delete Client</button>
