@@ -310,6 +310,7 @@ def guest_details(client_id):
         new_date = datetime.strptime(bookings[x]["date"], '%Y-%m-%d')
         bookings[x]["new_date"] = new_date.strftime("%a %d %b")
         bookings[x]["new_client_id"] = guest["first_name"] + " " + guest["last_name"]
+        bookings[x]["rating"] = int(bookings[x]["rating"])
     # for y in range(len(guest)):
     #     if str(guest[y]["_id"]) == str(bookings[x]["client_id"]):
     #         bookings[x]["new_client_id"] = guest[y]["first_name"] + " " + guest[y]["last_name"]

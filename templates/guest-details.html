@@ -163,6 +163,7 @@
             <th scope="col" class="visually-hidden">Guest</th>
             <th scope="col">People</th>
             <th scope="col">Status</th>
+            <th scope="col">Booking Rating</th>
             <th scope="col">Edit</th>
             <th scope="col" class="visually-hidden">Value</th>
             <th scope="col">Delete</th>
@@ -176,6 +177,13 @@
                 <td class="visually-hidden"><a href="{{ url_for('guest_details', client_id=booking.client_id) }}">{{ booking.new_client_id }}</a></td>
                 <td>{{ booking.people }}</td>
                 <td>{{ booking.status.capitalize() }}</td>
+                <td>
+                    <i class="{% if booking.rating and booking.rating >= 1 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                    <i class="{% if booking.rating and booking.rating >= 2 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                    <i class="{% if booking.rating and booking.rating >= 3 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                    <i class="{% if booking.rating and booking.rating >= 4 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                    <i class="{% if booking.rating and booking.rating >= 5 %} text-warning fas {% else %} text-danger far {% endif %} fa-star""></i>
+                </td>
                 <td><button onclick="editBooking('{{ booking._id }}', '{{ booking.date }}', '{{ booking.client_id }}')" data-bs-toggle="modal" data-bs-target="#editBooking" class="btn btn-outline-primary">Edit</button></td>
                 <td class="visually-hidden">{{ booking.value }}</td>
                 <td><button onclick="confirmDeleteBooking('{{ booking._id }}', '{{ booking.client_id }}', '{{ booking.value }}', '{{ booking.status }}')" class="btn btn-outline-danger">Delete</button></td>
